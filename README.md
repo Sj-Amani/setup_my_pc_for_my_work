@@ -37,8 +37,23 @@ After
 
 
 ### Install git:
-1. a
-2. b
+```
+sudo add-apt-repository ppa:git-core/ppa
+sudo apt install git git-lfs
+```
+
+### Install useful things
+```
+sudo apt update
+sudo apt upgrade
+sudo apt -y install  cmake cmake-gui zsh snap vim htop terminator gimp gawk build-essential dkms ccze
+sudo snap install ttyplot
+sudo snap install chromium
+sudo snap install code --classic
+sudo snap install slack --classic
+sudo snap install skype
+sudo apt autoremove
+```
 
 
 
