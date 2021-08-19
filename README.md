@@ -33,7 +33,7 @@ Before
 
 After
 
-![Before_Nvidia](images/01_Before_Nvidia_update.JPEG)
+![After_Nvidia](images/02_After_Nvidia_update.JPEG)
 
 
 ### Install git:
