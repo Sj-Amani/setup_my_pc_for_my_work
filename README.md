@@ -14,7 +14,32 @@ OS names: Ubuntu 18.04.5 & Windows 10.
 Current: Have just installed Ubuntu 18.04.5 LTS.  
 Target:  Setup all the Apps and settings for my work developments.
 
+## Reference:
+[configMyPC](https://github.com/jinshengye-git/configMyPC)
+
+
 ## Procedure
-### Backup all the important things from your current PC if you can (Optional) e.g.:
-1. Github Key
-2. ![search_apps](images/01_bionic-search-apps.png)
+### Make "app" folder:
+A good habbit is to keep all the "git" cloned folder in a directory named **app**. I usually keep it under my home directory.
+1.  `mkdir /home/$USER/app`.
+
+### Setup Nvidia Driver and Reboot PC:
+1. Activities 🡒 Software & Updates 🡒 Additional Drivers 🡒 Using Nvidia driver metapackage from nvidia-driver-470 (open source/proprietary , better to use latest tested one) 🡒 Apply Changes 🡒 Restart PC
+2. Also, if there is a part said "Intel Corporation: Unknown". You can ignore it.
+
+Before
+
+![Before_Nvidia](images/01_Before_Nvidia_update.JPEG)
+
+After
+
+![Before_Nvidia](images/01_Before_Nvidia_update.JPEG)
+
+
+### Install git:
+1. a
+2. b
+
+
+
+
