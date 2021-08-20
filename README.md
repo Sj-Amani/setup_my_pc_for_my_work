@@ -2,12 +2,12 @@
 This is how I setup my PC config (fresh Ubuntu 18.04.5 installed) in order to use for my work developments.
 
 ## Pc Info
-Name: Dell Alienware;
-CPU:  Intel(R) Core(TM) i7-9750H @2.60 GHz;
-GPU:  Geforce RTX 2070 with Max-Q Design;
-RAM:  16.0 GB;
-OS type: 64-bit;
-Disk: 1Tb SSD;
+Name: Dell Alienware;\
+CPU:  Intel(R) Core(TM) i7-9750H @2.60 GHz;\
+GPU:  Geforce RTX 2070 with Max-Q Design ([Turing NVIDIA GPU architecture/Hardware](https://en.wikipedia.org/wiki/CUDA));\
+RAM:  16.0 GB;\
+OS type: 64-bit;\
+Disk: 1Tb SSD;\
 OS names: Ubuntu 18.04.5 & Windows 10.
 
 ## Target:
@@ -56,7 +56,10 @@ sudo apt autoremove
 ```
 
 ### Install CUDA and cuDNN, and TensorRT
-For installing CUDA, I usually check which version we currenty use on the robots we have. This gives me a feeling to not be worry about the possible future problems while I am working with the packages installed/used on the robots we have. 
+
+**Target:**  install "zed sdk 3.4.2" (needs CUDA 10.2) 🡒 So, install "CUDA Toolkit 10.2" 🡒 install "cuDNN" & TensorRT (should be compatible with "CUDA Toolkit 10.2")
+
+For installing CUDA, I usually check which version we currenty use on the robots we have. This gives me a feeling to not be worry about the possible future problems while I am working with the packages installed/used on the robots we have. Currently, we are using "zed sdk 3.4.2" on the robots. "[zed sdk 3.4.2](https://www.stereolabs.com/developers/release/3.4/)" depends on the (>= CUDA 10.2). I will use "CUDA 10.2" but you can install other versions. However, on the robots, we are using "CUDA 10.2" now (Aug 20, 2021).
 
 However, I will explain a more general way here to be used by more cases. I mean to show how to choose a proper CUDA version for your **customized** settings on your PC. Let's start.
 
@@ -127,11 +130,14 @@ The version of the [NVIDIA GPU Driver packaged in each CUDA Toolkit release](htt
 
 ![CUDA_Toolkit_versions](images/03_CUDA_Toolkit_and_Corresponding_Driver_Versions.png)
 
-Base on the installed "NVIDIA GPU Driver", we can find the compatible "CUDA Toolkit" we can install. For example, my target **CUDA Toolkit** version is **10.2** today to match the version of the robots we have. I can see that the **CUDA Toolkit** version **10.2** is comaptible with my installed **"NVIDIA GPU Driver" (470.57.02)** (>= 440.33) on my PC.
+Base on the installed "NVIDIA GPU Driver", we can find the compatible "CUDA Toolkit" we can install. For example, my target **CUDA Toolkit** version is **10.2** today to match the version of the robots we have. I can see that the **CUDA Toolkit** version **10.2** is comaptible with my installed **"NVIDIA GPU Driver" (470.57.02)** (which is >= 440.33) on my PC.
 
 You can check the above table to find the suitable "CUDA Toolkit" version for your installed "NVIDIA GPU Driver" version.
 
+For cuDNN version compatible with your "CUDA Toolkit" version (CUDA Runtime API version), google this: [Supported NVIDIA hardware, CUDA, and CUDA driver](https://docs.nvidia.com/deeplearning/cudnn/support-matrix/index.html).\
+Something like this can be found:
 
+![cuDNN_version](images/04_cuDNN_and_Corresponding_CUDA_Runtime_API_Versions.png)
 
 
 
