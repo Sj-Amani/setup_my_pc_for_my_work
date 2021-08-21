@@ -157,12 +157,17 @@ I checked cuDNN version 8.2.1 is also compatible with CUDA Runtime API version 1
 
 **Conclusion:**\
 I will install:
-* CUDA Runtime API 10.2 using CUDA Toolkit 10.2 installer.
-* cuDNN 8.2.1
-* TenosrRT 8.0.1
-* Zed SDK 3.4.2
+  1. CUDA Runtime API 10.2 using CUDA Toolkit 10.2 installer
+  2. cuDNN 8.2.1
+  3. TenosrRT 8.0.1
+  4. Zed SDK 3.4.2
 
-        
+
+#### 1. CUDA Runtime API 10.2 using CUDA Toolkit 10.2 installer
+- You can download and install CUDA Runtime API from the [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit-archive) archive.
+- On the CUDA download page, select the following options. It's recommend to download a deb (network) version if you want to install Zed SDK later.
+
+![Cuda_toolkit](images/08_Cuda_toolkit.png)
 
 ```
 sudo apt -y install freeglut3 freeglut3-dev libxi-dev libxmu-dev
