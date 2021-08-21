@@ -139,7 +139,30 @@ Something like this can be found:
 
 ![cuDNN_version](images/04_cuDNN_and_Corresponding_CUDA_Runtime_API_Versions.png)
 
+Based on the above image, cuDNN version 8.2.2 is compatible with my CUDA Toolkit version 10.2 and my NVIDIA GPU Driver 470.57.02.
 
+Let's check the verison of "TensorRT" compatible with my config.\
+If you google these terms [the latest TensorRT List of supported features per platform](https://docs.nvidia.com/deeplearning/tensorrt/support-matrix/index.html) and [Released TensorRT Archives](https://docs.nvidia.com/deeplearning/tensorrt/archives/index.html), you will probably find somethings like these:
+
+TensorRT List of supported features per platform\
+![TensorRT_and_Corresponding](images/05_TensorRT_and_Corresponding_CUDA_Runtime_API_&_cuDNN_Versions.png)
+
+Released TensorRT Archives\
+![TensorRT_archives](images/06_TensorRT_archives.png)
+
+I found out that I may not be able to use the cuDNN version 8.2.2. So, I decided use cuDNN version 8.2.1 to be compatible with TenosrRT 8.0.1.\
+I checked cuDNN version 8.2.1 is also compatible with CUDA Runtime API version 10.2. 
+
+![Revised_cuDNN_version](images/07_Revised_cuDNN_version_based_on_TensorRT_801.png)
+
+**Conclusion:**\
+I will install:
+* CUDA Runtime API 10.2 using CUDA Toolkit 10.2 installer.
+* cuDNN 8.2.1
+* TenosrRT 8.0.1
+* Zed SDK 3.4.2
+
+        
 
 ```
 sudo apt -y install freeglut3 freeglut3-dev libxi-dev libxmu-dev
