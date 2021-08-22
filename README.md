@@ -54,6 +54,8 @@ sudo snap install slack --classic
 sudo snap install skype
 sudo apt autoremove
 ```
+### Add the languages you want
+1. Activities 🡒 Language Setup
 
 ### Install CUDA and cuDNN, and TensorRT
 
@@ -165,9 +167,42 @@ I will install:
 
 #### 1. CUDA Runtime API 10.2 using CUDA Toolkit 10.2 installer
 - You can download and install CUDA Runtime API from the [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit-archive) archive.
-- On the CUDA download page, select the following options. It's recommend to download a deb (network) version if you want to install Zed SDK later.
+- Check the [CUDA Toolkit Archive](https://developer.nvidia.com/cuda-toolkit-archive) 🡒 "Versioned Online Documentation" 🡒 "Installation Guide Linux" 🡒 "[Pre-installation Actions](https://docs.nvidia.com/cuda/archive/10.2/cuda-installation-guide-linux/index.html#pre-installation-actions)"  
+    - Especially, verify the System has the Correct Kernel Headers and Development Packages Installed. The version of the kernel your system must be the same as the version of the kernel headers and development packages prior to installing the CUDA Drivers. The following commands make it sure you have all you need:
+        - `uname -r` 🡒 The version of the kernel your system 
+        - `sudo apt-get install linux-headers-$(uname -r)`\
+                ```
+                $ Reading package lists... Done  
+                Building dependency tree       
+                Reading state information... Done  
+                linux-headers-5.4.0-81-generic is already the newest version (5.4.0-81.91~18.04.1).  
+                linux-headers-5.4.0-81-generic set to manually installed.  
+                0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+                ```
 
-![Cuda_toolkit](images/08_Cuda_toolkit.png)
+- Click "CUDA Toolkit 10.2" from the [CUDA Toolkit Archive](https://developer.nvidia.com/cuda-toolkit-archive). 
+- On the CUDA download page, select the following options to see the "Installation Instructions". It's recommend to download a deb (network) version if you want to install Zed SDK later. Download is done using the terminal command "wget".
+
+![Cuda_toolkit](images/08_Cuda_toolkit.png) 
+
+- Install these options which are not necessary to use the CUDA Toolkit, but are available to provide additional features: 
+```
+sudo apt install g++ freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev
+```
+
+- Then, do:
+```
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
+sudo apt update
+sudo apt -y install cuda-10-2
+```
+- Then restart.
+
+
+
 
 ```
 sudo apt -y install freeglut3 freeglut3-dev libxi-dev libxmu-dev
