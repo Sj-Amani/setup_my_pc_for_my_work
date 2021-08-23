@@ -500,7 +500,9 @@ sudo apt -y install libboost-all-dev
 sudo apt -y install libproj-dev
 sudo apt -y install libqt5svg5-dev
 sudo apt -y install libvtk6-qt-dev
-sudo apt-get install libsuitesparse-dev
+sudo ap -y install libsuitesparse-dev
+sudo apt -y install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev  --> Important to show the "BUILD_opencv_python2" option later!
+sudo apt install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev --> Important to show the "BUILD_opencv_python2" option later!
 cd ~
 mkdir app  &&  cd app
 git clone https://github.com/opencv/opencv.git
@@ -514,8 +516,25 @@ mkdir build
 cd build
 
 ```
+It is better use `cmake-gui` to configure, suppose you are in folder: `opencv/build/`
 
+```
+cmake-gui ..
 
+```
+Then click button: Configure
+- Choose "Unix CMake" & "Default native compiler" options
+
+Things you need to checkout:
+
+- make sure python2 python3 for cv2 available...
+- make sure sfm available
+- make sure CUDA IS ON
+- make sure NONFREE
+- make sure MODULE path e.g. /home/$USER/opencv_contrib/modules
+- make sure uncheck codec of cuda
+- make sure WITH_QT ON
+- make sure WITH_OPENGL OFF Then click "Generate" , after it finished, close cmake-gui and
 
 ```
 
