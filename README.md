@@ -412,6 +412,61 @@ dpkg -l |grep cuda   ➡️ List all installed cuda packages, along with package
 
 Nice, let's continue. ☑️
 
-### Install Zed SDK 3.4.2
-Download zed sdk from https://www.stereolabs.com/developers/release/2.8/ choose the correct version of CUDA and your Ubuntu then install it
+### [Install](https://www.stereolabs.com/docs/installation/linux/) Zed SDK 3.4.2
+- [Download](https://www.stereolabs.com/developers/release/3.4/) the Zed SDK 3.4.2 considering the correct version of CUDA and your Ubuntu.
+- Go to the folder where the installer has been downloaded.
+- Add execution permission to the installer using the chmod +x command. Make sure to replace the installer name with the version you downloaded.
+```
+chmod +x ZED_SDK_Ubuntu18_cuda10.2_v3.4.2.run
+```
+- Run the ZED SDK installer.
+```
+./ZED_SDK_Ubuntu18_cuda10.2_v3.4.2.run
+```
+- At the beginning of the installation, the Software License will be displayed, hit `q` after reading it.
+- During the installation, you might have to answer some questions on dependencies, tools and samples installation. Type `y` for yes and `n` for no and hit `Enter`. Hit `Enter` to pick the default option.
+- Important question that I answered:
+```
+Do you want to install the Object Detection module (recommended), cuDNN 8.0 and TensorRT 7.1 will be installed [Y/n] ?n  ➡️ because I did not want to install cuDNN 8.0 and TensorRT 7.1! 
+Install samples (recommended) [Y/n] ?n
+Do you want to auto-install dependencies (recommended) ? following packet will be installed via the package manager : libjpeg-turbo8 libturbojpeg libusb-1.0 libopenblas-dev libv4l-0 curl unzip libpng16-16 libpng-dev libturbojpeg0-dev python3-dev python3-pip python3-setuptools qt5-default libqt5opengl5 libqt5svg5 [Y/n] ?Y
+...
+...
+Do you want to install the Python API (recommended) [Y/n] ?Y
+Please specify your python executable: python3
+Collecting numpy
+  Downloading https://files.pythonhosted.org/packages/45/b2/6c7545bb7a38754d63048c7696804a0d947328125d81bf12beaa692c3ae3/numpy-1.19.5-cp36-cp36m-manylinux1_x86_64.whl (13.4MB)
+    100% |████████████████████████████████| 13.4MB 154kB/s 
+Installing collected packages: numpy
+Successfully installed numpy-1.19.5
+-> Downloading to '/tmp/selfgz2152'
+Detected platform: 
+	 ubuntu18
+	 Python 3.6
+	 CUDA 10.2
+	 ZED SDK 3.4 (requiring CUDA 10.2)
+-> Checking if https://download.stereolabs.com/zedsdk/3.4/ubuntu18/cu102/py36 exists and is available
+-> Found ! Downloading python package into /tmp/selfgz2152/pyzed-3.4-cp36-cp36m-linux_x86_64.whl
+-> Installing necessary dependencies
+Collecting numpy
+  Using cached https://files.pythonhosted.org/packages/45/b2/6c7545bb7a38754d63048c7696804a0d947328125d81bf12beaa692c3ae3/numpy-1.19.5-cp36-cp36m-manylinux1_x86_64.whl
+Installing collected packages: numpy
+Successfully installed numpy-1.19.5
+Processing ./pyzed-3.4-cp36-cp36m-linux_x86_64.whl
+Installing collected packages: pyzed
+Successfully installed pyzed-3.4
+Done
+  To install it later or on a different environment run : 
+ python -m pip install --ignore-installed /tmp/selfgz2152/pyzed-3.4-cp36-cp36m-linux_x86_64.whl
+The ZED Python API was installed for 'python3', when using conda environement or virtualenv, the ZED Python API may need to be resetup to be available (using 'python /usr/local/zed/get_python_api.py')
+
+ZED SDK installation complete !
+```
+- At
+
+
+
+```
+
+```
 
