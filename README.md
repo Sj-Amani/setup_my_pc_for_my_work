@@ -181,7 +181,7 @@ I will install:
                 ```
 
 - Click "CUDA Toolkit 10.2" from the [CUDA Toolkit Archive](https://developer.nvidia.com/cuda-toolkit-archive). 
-- On the CUDA download page, select the following options to see the "Installation Instructions". It's recommend to download a deb (network) version if you want to install Zed SDK later. Download is done using the terminal command "wget".
+- On the CUDA download page, select the following options to see the "Installation Instructions". It's recommend to download a deb (network) version if you have a good internet connection. The difference between "deb (local)" and "deb (network)" is whether you download them all at once or during installation. 
 
 ![Cuda_toolkit](images/08_Cuda_toolkit.png) 
 
