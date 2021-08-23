@@ -245,6 +245,16 @@ cuda_version=cuda10.2
 sudo apt install libcudnn8=${cudnn_version}-1+${cuda_version}
 sudo apt install libcudnn8-dev=${cudnn_version}-1+${cuda_version}
 ```
+- Hold the `libcudnn8` package at this version to prevent cuDNN from being updated to the latest CUDA version. 
+```
+sudo apt-mark hold libcudnn8 libcudnn8-dev
+dpkg --get-selections|grep hold   ➡️ to check
+```  
+  - (SKIPPED) NOTE: If you want to upgrade to the latest version of cuDNN or the latest version of CUDA, then you can unhold the `libcudnn8` package using the following command.
+    ```
+    sudo apt-mark unhold libcudnn8 libcudnn8-dev
+    ```
+
 - The installaion verification and the version of the cuDNN can be checked by running:
 ```
 cat /usr/include/x86_64-linux-gnu/cudnn_v*.h | grep CUDNN_MAJOR -A 2    👇
@@ -273,7 +283,8 @@ version="8.0.1-1+cuda10.2"
 sudo apt install libnvinfer8=${version} libnvonnxparsers8=${version} libnvparsers8=${version} libnvinfer-plugin8=${version} libnvinfer-dev=${version} libnvonnxparsers-dev=${version} libnvparsers-dev=${version} libnvinfer-plugin-dev=${version} python3-libnvinfer=${version}
 
 sudo apt-mark hold libnvinfer8 libnvonnxparsers8 libnvparsers8 libnvinfer-plugin8 libnvinfer-dev libnvonnxparsers-dev libnvparsers-dev libnvinfer-plugin-dev python3-libnvinfer
-``` 
+dpkg --get-selections|grep hold   ➡️ to check
+```  
   - (SKIPPED) NOTE: If you want to upgrade to the latest version of TensorRT or the latest version of CUDA, then you can unhold the `libnvinfer8` package using the following command.
     ```
     sudo apt-mark unhold libnvinfer8 libnvonnxparsers8 libnvparsers8 libnvinfer-plugin8 libnvinfer-dev libnvonnxparsers-dev libnvparsers-dev libnvinfer-plugin-dev python3-libnvinfer
@@ -281,34 +292,126 @@ sudo apt-mark hold libnvinfer8 libnvonnxparsers8 libnvparsers8 libnvinfer-plugin
 
 3. The installaion verification and the version of the TenosrRT can be checked by running:
 ```
-dpkg -l | grep TensorRT
+dpkg -l | grep TensorRT    👇
+    hi  libnvinfer-dev                             8.0.1-1+cuda10.2                                 amd64        TensorRT development libraries and headers
+    hi  libnvinfer-plugin-dev                      8.0.1-1+cuda10.2                                 amd64        TensorRT plugin libraries
+    hi  libnvinfer-plugin8                         8.0.1-1+cuda10.2                                 amd64        TensorRT plugin libraries
+    hi  libnvinfer8                                8.0.1-1+cuda10.2                                 amd64        TensorRT runtime libraries
+    hi  libnvonnxparsers-dev                       8.0.1-1+cuda10.2                                 amd64        TensorRT ONNX libraries
+    hi  libnvonnxparsers8                          8.0.1-1+cuda10.2                                 amd64        TensorRT ONNX libraries
+    hi  libnvparsers-dev                           8.0.1-1+cuda10.2                                 amd64        TensorRT parsers libraries
+    hi  libnvparsers8                              8.0.1-1+cuda10.2                                 amd64        TensorRT parsers libraries
+    hi  python3-libnvinfer                         8.0.1-1+cuda10.2                                 amd64        Python 3 bindings for TensorRT
 ```
 
-
+I run the following commands again:
 
 ```
-sudo apt -y install freeglut3 freeglut3-dev libxi-dev libxmu-dev
-sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
-wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.1.168-1_amd64.deb
-sudo dpkg -i cuda-repo-ubuntu1804_10.1.168-1_amd64.deb
-sudo apt update
-sudo apt upgrade
-sudo apt -y install cuda-10-2
-
-#after reboot install cuDNN and TensorRT
-wget http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/nvidia-machine-learning-repo-ubuntu1804_1.0.0-1_amd64.deb
-sudo apt -y install ./nvidia-machine-learning-repo-ubuntu1804_1.0.0-1_amd64.deb
-sudo apt update
-sudo apt -y install libcudnn8 libcudnn8-dev
-sudo apt -y install nvinfer-runtime-trt-repo-ubuntu1804-5.0.2-ga-cuda10.0
-sudo apt update
-sudo apt -y install -y --no-install-recommends libnvinfer-dev
-dpkg -l |grep cuda
-#sudo apt-mark hold ***
-dpkg --get-selections|grep hold
-
 nvidia-smi
 
+    Thu Aug 19 14:55:49 2021       
+    +-----------------------------------------------------------------------------+
+    | NVIDIA-SMI 470.57.02    Driver Version: 470.57.02    CUDA Version: 11.4     |
+    |-------------------------------+----------------------+----------------------+
+    | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+    |                               |                      |               MIG M. |
+    |===============================+======================+======================|
+    |   0  NVIDIA GeForce ...  Off  | 00000000:01:00.0 Off |                  N/A |
+    | N/A   52C    P0    31W /  N/A |    448MiB /  7982MiB |     23%      Default |
+    |                               |                      |                  N/A |
+    +-------------------------------+----------------------+----------------------+
+
+    +-----------------------------------------------------------------------------+
+    | Processes:                                                                  |
+    |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+    |        ID   ID                                                   Usage      |
+    |=============================================================================|
+    |    0   N/A  N/A      1564      G   /usr/lib/xorg/Xorg                199MiB |
+    |    0   N/A  N/A      1735      G   /usr/bin/gnome-shell              157MiB |
+    |    0   N/A  N/A     16092      G   ...AAAAAAAAA= --shared-files       30MiB |
+    |    0   N/A  N/A     16758      G   ...AAAAAAAAA= --shared-files       57MiB |
+    +-----------------------------------------------------------------------------+
+```
+```
+nvcc --version
+
+    nvcc: NVIDIA (R) Cuda compiler driver
+    Copyright (c) 2005-2019 NVIDIA Corporation
+    Built on Wed_Oct_23_19:24:38_PDT_2019
+    Cuda compilation tools, release 10.2, V10.2.89
 ```
 
+```
+dpkg -l |grep cuda   ➡️ List all installed cuda packages, along with package version and short description
+
+    ii  cuda-10-2                                  10.2.89-1                                        amd64        CUDA 10.2 meta-package
+    ii  cuda-command-line-tools-10-2               10.2.89-1                                        amd64        CUDA command-line tools
+    ii  cuda-compiler-10-2                         10.2.89-1                                        amd64        CUDA compiler
+    ii  cuda-cudart-10-2                           10.2.89-1                                        amd64        CUDA Runtime native Libraries
+    ii  cuda-cudart-dev-10-2                       10.2.89-1                                        amd64        CUDA Runtime native dev links, headers
+    ii  cuda-cufft-10-2                            10.2.89-1                                        amd64        CUFFT native runtime libraries
+    ii  cuda-cufft-dev-10-2                        10.2.89-1                                        amd64        CUFFT native dev links, headers
+    ii  cuda-cuobjdump-10-2                        10.2.89-1                                        amd64        CUDA cuobjdump
+    ii  cuda-cupti-10-2                            10.2.89-1                                        amd64        CUDA profiling tools runtime libs.
+    ii  cuda-cupti-dev-10-2                        10.2.89-1                                        amd64        CUDA profiling tools interface.
+    ii  cuda-curand-10-2                           10.2.89-1                                        amd64        CURAND native runtime libraries
+    ii  cuda-curand-dev-10-2                       10.2.89-1                                        amd64        CURAND native dev links, headers
+    ii  cuda-cusolver-10-2                         10.2.89-1                                        amd64        CUDA solver native runtime libraries
+    ii  cuda-cusolver-dev-10-2                     10.2.89-1                                        amd64        CUDA solver native dev links, headers
+    ii  cuda-cusparse-10-2                         10.2.89-1                                        amd64        CUSPARSE native runtime libraries
+    ii  cuda-cusparse-dev-10-2                     10.2.89-1                                        amd64        CUSPARSE native dev links, headers
+    ii  cuda-demo-suite-10-2                       10.2.89-1                                        amd64        Demo suite for CUDA
+    ii  cuda-documentation-10-2                    10.2.89-1                                        amd64        CUDA documentation
+    ii  cuda-driver-dev-10-2                       10.2.89-1                                        amd64        CUDA Driver native dev stub library
+    ii  cuda-drivers                               470.57.02-1                                      amd64        CUDA Driver meta-package, branch-agnostic
+    ii  cuda-drivers-470                           470.57.02-1                                      amd64        CUDA Driver meta-package, branch-specific
+    ii  cuda-gdb-10-2                              10.2.89-1                                        amd64        CUDA-GDB
+    ii  cuda-libraries-10-2                        10.2.89-1                                        amd64        CUDA Libraries 10.2 meta-package
+    ii  cuda-libraries-dev-10-2                    10.2.89-1                                        amd64        CUDA Libraries 10.2 development meta-package
+    ii  cuda-license-10-2                          10.2.89-1                                        amd64        CUDA licenses
+    ii  cuda-memcheck-10-2                         10.2.89-1                                        amd64        CUDA-MEMCHECK
+    ii  cuda-misc-headers-10-2                     10.2.89-1                                        amd64        CUDA miscellaneous headers
+    ii  cuda-npp-10-2                              10.2.89-1                                        amd64        NPP native runtime libraries
+    ii  cuda-npp-dev-10-2                          10.2.89-1                                        amd64        NPP native dev links, headers
+    ii  cuda-nsight-10-2                           10.2.89-1                                        amd64        CUDA nsight
+    ii  cuda-nsight-compute-10-2                   10.2.89-1                                        amd64        NVIDIA Nsight Compute
+    ii  cuda-nsight-systems-10-2                   10.2.89-1                                        amd64        NVIDIA Nsight Systems
+    ii  cuda-nvcc-10-2                             10.2.89-1                                        amd64        CUDA nvcc
+    ii  cuda-nvdisasm-10-2                         10.2.89-1                                        amd64        CUDA disassembler
+    ii  cuda-nvgraph-10-2                          10.2.89-1                                        amd64        NVGRAPH native runtime libraries
+    ii  cuda-nvgraph-dev-10-2                      10.2.89-1                                        amd64        NVGRAPH native dev links, headers
+    ii  cuda-nvjpeg-10-2                           10.2.89-1                                        amd64        NVJPEG native runtime libraries
+    ii  cuda-nvjpeg-dev-10-2                       10.2.89-1                                        amd64        NVJPEG native dev links, headers
+    ii  cuda-nvml-dev-10-2                         10.2.89-1                                        amd64        NVML native dev links, headers
+    ii  cuda-nvprof-10-2                           10.2.89-1                                        amd64        CUDA Profiler tools
+    ii  cuda-nvprune-10-2                          10.2.89-1                                        amd64        CUDA nvprune
+    ii  cuda-nvrtc-10-2                            10.2.89-1                                        amd64        NVRTC native runtime libraries
+    ii  cuda-nvrtc-dev-10-2                        10.2.89-1                                        amd64        NVRTC native dev links, headers
+    ii  cuda-nvtx-10-2                             10.2.89-1                                        amd64        NVIDIA Tools Extension
+    ii  cuda-nvvp-10-2                             10.2.89-1                                        amd64        CUDA nvvp
+    ii  cuda-runtime-10-2                          10.2.89-1                                        amd64        CUDA Runtime 10.2 meta-package
+    ii  cuda-samples-10-2                          10.2.89-1                                        amd64        CUDA example applications
+    ii  cuda-sanitizer-api-10-2                    10.2.89-1                                        amd64        CUDA Sanitizer API
+    ii  cuda-toolkit-10-2                          10.2.89-1                                        amd64        CUDA Toolkit 10.2 meta-package
+    ii  cuda-tools-10-2                            10.2.89-1                                        amd64        CUDA Tools meta-package
+    ii  cuda-visual-tools-10-2                     10.2.89-1                                        amd64        CUDA visual tools
+    ii  libcudnn8                                  8.2.1.32-1+cuda10.2                              amd64        cuDNN runtime libraries
+    ii  libcudnn8-dev                              8.2.1.32-1+cuda10.2                              amd64        cuDNN development libraries and headers
+    hi  libnvinfer-dev                             8.0.1-1+cuda10.2                                 amd64        TensorRT development libraries and headers
+    hi  libnvinfer-plugin-dev                      8.0.1-1+cuda10.2                                 amd64        TensorRT plugin libraries
+    hi  libnvinfer-plugin8                         8.0.1-1+cuda10.2                                 amd64        TensorRT plugin libraries
+    hi  libnvinfer8                                8.0.1-1+cuda10.2                                 amd64        TensorRT runtime libraries
+    hi  libnvonnxparsers-dev                       8.0.1-1+cuda10.2                                 amd64        TensorRT ONNX libraries
+    hi  libnvonnxparsers8                          8.0.1-1+cuda10.2                                 amd64        TensorRT ONNX libraries
+    hi  libnvparsers-dev                           8.0.1-1+cuda10.2                                 amd64        TensorRT parsers libraries
+    hi  libnvparsers8                              8.0.1-1+cuda10.2                                 amd64        TensorRT parsers libraries
+    hi  python3-libnvinfer                         8.0.1-1+cuda10.2                                 amd64        Python 3 bindings for TensorRT
+
+```
+
+Nice, let's continue. ☑️
+
+### Install Zed SDK 3.4.2
+Download zed sdk from https://www.stereolabs.com/developers/release/2.8/ choose the correct version of CUDA and your Ubuntu then install it
 
