@@ -24,7 +24,7 @@ A good habbit is to keep all the "git" cloned folder in a directory named **app*
 1.  `mkdir /home/$USER/app`.
 
 ### Setup Nvidia Driver and Reboot PC:
-1. Activities 🡒 Software & Updates 🡒 Additional Drivers 🡒 Using Nvidia driver metapackage from nvidia-driver-470 (open source/proprietary , better to use latest tested one) 🡒 Apply Changes 🡒 Restart PC
+1. Activities ➡️ Software & Updates ➡️ Additional Drivers ➡️ Using Nvidia driver metapackage from nvidia-driver-470 (open source/proprietary , better to use latest tested one) ➡️ Apply Changes ➡️ Restart PC
 2. Also, if there is a part said "Intel Corporation: Unknown". You can ignore it.
 
 Before
@@ -55,11 +55,11 @@ sudo snap install skype
 sudo apt autoremove
 ```
 ### Add the languages you want
-1. Activities 🡒 Language Setup
+1. Activities ➡️ Language Setup
 
 ### Install CUDA and cuDNN, and TensorRT
 
-**Target:**  install "zed sdk 3.4.2" (needs CUDA 10.2) 🡒 So, install "CUDA Toolkit 10.2" 🡒 install "cuDNN" & TensorRT (should be compatible with "CUDA Toolkit 10.2")
+**Target:**  install "zed sdk 3.4.2" (needs CUDA 10.2) ➡️ So, install "CUDA Toolkit 10.2" ➡️ install "cuDNN" & TensorRT (should be compatible with "CUDA Toolkit 10.2")
 
 For installing CUDA, I usually check which version we currenty use on the robots we have. This gives me a feeling to not be worry about the possible future problems while I am working with the packages installed/used on the robots we have. Currently, we are using "zed sdk 3.4.2" on the robots. "[zed sdk 3.4.2](https://www.stereolabs.com/developers/release/3.4/)" depends on the (>= CUDA 10.2). I will use "CUDA 10.2" but you can install other versions. However, on the robots, we are using "CUDA 10.2" now (Aug 20, 2021).
 
@@ -167,10 +167,10 @@ I will install:
 
 #### 1. CUDA Runtime API 10.2 using CUDA Toolkit 10.2 installer
 - You can download and install CUDA Runtime API from the [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit-archive) archive.
-- Check the [CUDA Toolkit Archive](https://developer.nvidia.com/cuda-toolkit-archive) 🡒 "Versioned Online Documentation" 🡒 "Installation Guide Linux" 🡒 "[Pre-installation Actions](https://docs.nvidia.com/cuda/archive/10.2/cuda-installation-guide-linux/index.html#pre-installation-actions)"  
+- Check the [CUDA Toolkit Archive](https://developer.nvidia.com/cuda-toolkit-archive) ➡️ "Versioned Online Documentation" ➡️ "Installation Guide Linux" ➡️ "[Pre-installation Actions](https://docs.nvidia.com/cuda/archive/10.2/cuda-installation-guide-linux/index.html#pre-installation-actions)"  
     - Especially, verify the System has the Correct Kernel Headers and Development Packages Installed. The version of the kernel your system must be the same as the version of the kernel headers and development packages prior to installing the CUDA Drivers. The following commands make it sure you have all you need:
-        - `uname -r` 🡒 The version of the kernel your system 
-        - `sudo apt-get install linux-headers-$(uname -r)`\
+        - `uname -r` 👉 The version of the kernel your system 
+        - `sudo apt-get install linux-headers-$(uname -r)` 👇    
                 ```
                 $ Reading package lists... Done  
                 Building dependency tree       
@@ -201,7 +201,13 @@ sudo apt -y install cuda-10-2
 ```
 - Then restart.
 
+- **NOTE:** I did not use the "Nsight Eclipse Plugins". But If one day I decide to use these plugins, I first need to install the "standard Eclipse IDE for C++". Then, [intsall those plugins using scripts](https://docs.nvidia.com/cuda/nsightee-plugins-install-guide/index.html#script-install). This is because there is no longer a standalone fork of Eclipse for the Nsight IDE. Instead plugins are shipped which run inside in the standard Eclipse IDE for C++. Also, you need to include `/usr/local/cuda-10.2/NsightCompute-2019.1` to you [`PATH`variable](https://docs.nvidia.com/cuda/archive/10.2/cuda-installation-guide-linux/index.html#environment-setup) in `.bashrc`. e.g:
+    - `$ export PATH=/usr/local/cuda-10.2/bin:/usr/local/cuda-10.2/NsightCompute-2019.1${PATH:+:${PATH}}`
+    -  where `2019.1` is the `<tool-version>` refers to the version of Nsight Compute that ships with the CUDA toolkit you installed.
 
+#### 2. cuDNN 8.2.1
+- Check the [cuDNN Documentation Archives](https://docs.nvidia.com/deeplearning/cudnn/archives/index.html)
+- Check "Release 8.2.1" ➡️ "[cuDNN Installation Guide](https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-821/install-guide/index.html#cudnn-package-manager-installation-overview)"
 
 
 ```
