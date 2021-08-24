@@ -201,6 +201,20 @@ sudo apt -y install cuda-10-2
 ```
 - Then restart.
 
+- Hold the `cuda` packages at this version to prevent cuda and Nvidia Driver from being updated to the latest version. 
+- Find them by:
+```
+dpkg -l |grep cuda
+```
+```
+sudo apt-mark hold cuda-10-2 cuda-command-line-tools-10-2 cuda-compiler-10-2 cuda-cudart-10-2 cuda-cudart-dev-10-2 cuda-cufft-10-2 cuda-cufft-dev-10-2 cuda-cuobjdump-10-2 cuda-cupti-10-2 cuda-cupti-dev-10-2 cuda-curand-10-2 cuda-curand-dev-10-2 cuda-cusolver-10-2 cuda-cusolver-dev-10-2 cuda-cusparse-10-2 cuda-cusparse-dev-10-2 cuda-demo-suite-10-2 cuda-documentation-10-2 cuda-driver-dev-10-2 cuda-drivers cuda-drivers-470 cuda-gdb-10-2 cuda-libraries-10-2 cuda-libraries-dev-10-2 cuda-license-10-2 cuda-memcheck-10-2 cuda-misc-headers-10-2 cuda-npp-10-2 cuda-npp-dev-10-2 cuda-nsight-10-2 cuda-nsight-compute-10-2 cuda-nsight-systems-10-2 cuda-nvcc-10-2 cuda-nvdisasm-10-2 cuda-nvgraph-10-2 cuda-nvgraph-dev-10-2 cuda-nvjpeg-10-2 cuda-nvjpeg-dev-10-2 cuda-nvml-dev-10-2 cuda-nvprof-10-2 cuda-nvprune-10-2 cuda-nvrtc-10-2 cuda-nvrtc-dev-10-2 cuda-nvtx-10-2 cuda-nvvp-10-2 cuda-runtime-10-2 cuda-samples-10-2 cuda-sanitizer-api-10-2 cuda-toolkit-10-2 cuda-tools-10-2 cuda-visual-tools-10-2
+dpkg --get-selections|grep hold   ➡️ to check
+```  
+  - (SKIPPED) NOTE: If you want to upgrade to the latest version of cuDNN or the latest version of CUDA, then you can unhold the `libcudnn8` package using the following command.
+    ```
+    sudo apt-mark unhold libcudnn8 libcudnn8-dev
+    ```
+
 - There are some [post-installation actions](https://docs.nvidia.com/cuda/archive/10.2/cuda-installation-guide-linux/index.html#post-installation-actions) that must be manually performed:
     1. Environment Setup: Add these lines to your ".bashrc" or other bash environment config files:
     ```
@@ -763,7 +777,11 @@ pwd
 OPENCV_TEST_DATA_PATH="/home/samani/app/opencv_extra/testdata"
 cd ../../opencv/build/bin/
 ./opencv_test_core    👇
-
+```
+<details>
+  <summary>Click to expand!🔽</summary>
+  
+  ```
 	CTEST_FULL_OUTPUT
 	OpenCV version: 4.1.1
 	OpenCV VCS version: 4.1.1
@@ -788,8 +806,9 @@ cd ../../opencv/build/bin/
 		[ RUN      ] OCL_MeanStdDev_.ZeroMask
 		[       OK ] OCL_MeanStdDev_.ZeroMask (371 ms)
 		[----------] 1 test from OCL_MeanStdDev_ (371 ms total)
+  ```
+</details>
 
-```
 
 
 
@@ -824,6 +843,409 @@ cd apriltag
 cmake .
 make
 sudo make install
+```
+
+### Install libpointmatcher [SKIPPED]
+Because this is used for "RTAB-Map" and it is not going to be used, I do NOT install it.
+However, this is how to install it if one day I want it:
+```
+git clone git://github.com/ethz-asl/libnabo.git
+cd libnabo
+SRC_DIR=`pwd`
+BUILD_DIR=${SRC_DIR}/build
+mkdir -p ${BUILD_DIR} && cd ${BUILD_DIR}
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ${SRC_DIR}
+# if Eigen or Boost are not available system-wide, run at that point: 
+#   cmake-gui .
+# cmake-gui allows you to tell the location of Eigen or Boost
+make
+sudo make install
+
+
+git clone https://github.com/ethz-asl/libpointmatcher.git
+cd libpointmatcher
+mkdir build && cd build
+cmake ..
+make
+sudo make install
+
+```
+
+### Install ROS Melodic
+I will follow [this](http://wiki.ros.org/melodic/Installation/Ubuntu#Installation) toturial. Here is what I did:
+- Configure your [Ubuntu repositories](https://help.ubuntu.com/community/Repositories/Ubuntu) to allow "restricted," "universe," and "multiverse.
+	- if they are not ticked, just click on each box to activate them. Mine were active.
+	 
+	![Ubuntu_repositories](images/10_Ubuntu_repositories.png)
+
+- Setup your sources.list: Setup your computer to accept software from packages.ros.org.
+```
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+```
+- Set up your keys
+```
+sudo apt install curl # if you haven't already installed curl
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+```
+- Make sure your Debian package index is up-to-date:
+```
+sudo apt update
+```
+- Desktop-Full Install: (Recommended) : ROS, rqt, rviz, robot-generic libraries, 2D/3D simulators and 2D/3D perception
+```
+sudo apt install ros-melodic-desktop-full 👇
+```
+<details>
+  <summary>Click to expand!🔽</summary>
+  
+  ```
+	Reading package lists... Done
+	Building dependency tree       
+	Reading state information... Done
+	The following package was automatically installed and is no longer required:
+	  libpng12-0
+	Use 'sudo apt autoremove' to remove it.
+	The following additional packages will be installed:
+	  binfmt-support blt bzip2-doc docutils-common docutils-doc fltk1.3-doc fluid fonts-lato fonts-lyx
+	  gazebo9 gazebo9-common gazebo9-plugin-base google-mock googletest graphviz hddtemp libann0
+	  libapr1 libapr1-dev libaprutil1 libaprutil1-dev libassimp-dev libassimp4 libassuan-dev
+	  libavdevice-dev libavdevice57 libavfilter-dev libbullet-dev libbullet2.87 libbz2-dev libccd-dev
+	  libccd2 libcdt5 libcgraph6 libcharls1 libconsole-bridge-dev libconsole-bridge0.4
+	  libcurl4-openssl-dev libfltk-cairo1.3 libfltk-forms1.3 libfltk-gl1.3 libfltk-images1.3 libfltk1.3
+	  libfltk1.3-dev libfreeimage-dev libfreeimage3 libgazebo9 libgazebo9-dev libgdcm2-dev libgdcm2.8
+	  libgpg-error-dev libgpgme-dev libgraphviz-dev libgtest-dev libgts-0.7-5 libgts-bin libgts-dev
+	  libgvc6 libgvc6-plugins-gtk libgvpr2 libignition-cmake-dev libignition-common
+	  libignition-common-dev libignition-fuel-tools1-1 libignition-fuel-tools1-dev libignition-math4
+	  libignition-math4-dev libignition-msgs libignition-msgs-dev libignition-transport4
+	  libignition-transport4-dev libilmbase-dev libjs-jquery-ui libjxr0 liblab-gamut1 liblapack-dev
+	  libldap2-dev liblept5 liblog4cxx-dev liblog4cxx10v5 liblz4-dev libogre-1.9-dev libogre-1.9.0v5
+	  libopenal-data libopenal-dev libopenal1 libopencv-calib3d-dev libopencv-calib3d3.2
+	  libopencv-contrib-dev libopencv-contrib3.2 libopencv-core-dev libopencv-core3.2 libopencv-dev
+	  libopencv-features2d-dev libopencv-features2d3.2 libopencv-flann-dev libopencv-flann3.2
+	  libopencv-highgui-dev libopencv-highgui3.2 libopencv-imgcodecs-dev libopencv-imgcodecs3.2
+	  libopencv-imgproc-dev libopencv-imgproc3.2 libopencv-ml-dev libopencv-ml3.2
+	  libopencv-objdetect-dev libopencv-objdetect3.2 libopencv-photo-dev libopencv-photo3.2
+	  libopencv-shape-dev libopencv-shape3.2 libopencv-stitching-dev libopencv-stitching3.2
+	  libopencv-superres-dev libopencv-superres3.2 libopencv-ts-dev libopencv-video-dev
+	  libopencv-video3.2 libopencv-videoio-dev libopencv-videoio3.2 libopencv-videostab-dev
+	  libopencv-videostab3.2 libopencv-viz-dev libopencv-viz3.2 libopencv3.2-java libopencv3.2-jni
+	  libopenexr-dev libpathplan4 libpoco-dev libpococrypto50 libpocodata50 libpocodatamysql50
+	  libpocodataodbc50 libpocodatasqlite50 libpocofoundation50 libpocojson50 libpocomongodb50
+	  libpoconet50 libpoconetssl50 libpocoredis50 libpocoutil50 libpocoxml50 libpocozip50
+	  libpostproc-dev libprotoc-dev libqtpropertybrowser4 libqwt-headers libqwt-qt5-6 libqwt-qt5-dev
+	  libruby2.5 libsctp-dev libsctp1 libsdformat6 libsdformat6-dev libsdl2-2.0-0 libsimbody-dev
+	  libsimbody3.5v5 libsndio6.1 libsocket++1 libspnav0 libtar-dev libtar0 libtesseract4
+	  libtinyxml-dev libtinyxml2-6 libtinyxml2-dev liburdfdom-dev liburdfdom-headers-dev
+	  liburdfdom-model liburdfdom-model-state liburdfdom-sensor liburdfdom-world libwxbase3.0-0v5
+	  libwxgtk3.0-gtk3-0v5 libxdot4 libyaml-cpp-dev libyaml-cpp0.5v5 libyaml-dev libzip-dev libzip4
+	  libzmq3-dev libzzip-0-13 opencv-data pyqt5-dev python-backports.functools-lru-cache
+	  python-catkin-pkg python-catkin-pkg-modules python-chardet python-cycler python-dateutil
+	  python-defusedxml python-docutils python-empy python-gnupg python-matplotlib
+	  python-matplotlib-data python-netifaces python-nose python-opencv python-opengl python-paramiko
+	  python-pycryptodome python-pydot python-pygments python-pyparsing python-pyqt5
+	  python-pyqt5.qtopengl python-pyqt5.qtsvg python-pyqt5.qtwebkit python-roman python-rosdep-modules
+	  python-rosdistro python-rosdistro-modules python-rospkg python-rospkg-modules python-sip
+	  python-sip-dev python-subprocess32 python-tk python-tz python-wxgtk3.0 python-wxtools
+	  python-wxversion python-yaml rake ros-melodic-actionlib ros-melodic-actionlib-msgs
+	  ros-melodic-actionlib-tutorials ros-melodic-angles ros-melodic-bond ros-melodic-bond-core
+	  ros-melodic-bondcpp ros-melodic-bondpy ros-melodic-camera-calibration
+	  ros-melodic-camera-calibration-parsers ros-melodic-camera-info-manager ros-melodic-catkin
+	  ros-melodic-class-loader ros-melodic-cmake-modules ros-melodic-common-msgs
+	  ros-melodic-common-tutorials ros-melodic-compressed-depth-image-transport
+	  ros-melodic-compressed-image-transport ros-melodic-control-msgs ros-melodic-control-toolbox
+	  ros-melodic-controller-interface ros-melodic-controller-manager
+	  ros-melodic-controller-manager-msgs ros-melodic-cpp-common ros-melodic-cv-bridge
+	  ros-melodic-depth-image-proc ros-melodic-desktop ros-melodic-diagnostic-aggregator
+	  ros-melodic-diagnostic-analysis ros-melodic-diagnostic-common-diagnostics
+	  ros-melodic-diagnostic-msgs ros-melodic-diagnostic-updater ros-melodic-diagnostics
+	  ros-melodic-diff-drive-controller ros-melodic-dynamic-reconfigure ros-melodic-eigen-conversions
+	  ros-melodic-executive-smach ros-melodic-filters ros-melodic-forward-command-controller
+	  ros-melodic-gazebo-dev ros-melodic-gazebo-msgs ros-melodic-gazebo-plugins ros-melodic-gazebo-ros
+	  ros-melodic-gazebo-ros-control ros-melodic-gazebo-ros-pkgs ros-melodic-gencpp ros-melodic-geneus
+	  ros-melodic-genlisp ros-melodic-genmsg ros-melodic-gennodejs ros-melodic-genpy
+	  ros-melodic-geometry ros-melodic-geometry-msgs ros-melodic-geometry-tutorials
+	  ros-melodic-gl-dependency ros-melodic-hardware-interface ros-melodic-image-common
+	  ros-melodic-image-geometry ros-melodic-image-pipeline ros-melodic-image-proc
+	  ros-melodic-image-publisher ros-melodic-image-rotate ros-melodic-image-transport
+	  ros-melodic-image-transport-plugins ros-melodic-image-view
+	  ros-melodic-interactive-marker-tutorials ros-melodic-interactive-markers
+	  ros-melodic-joint-limits-interface ros-melodic-joint-state-controller
+	  ros-melodic-joint-state-publisher ros-melodic-kdl-conversions ros-melodic-kdl-parser
+	  ros-melodic-kdl-parser-py ros-melodic-laser-assembler ros-melodic-laser-filters
+	  ros-melodic-laser-geometry ros-melodic-laser-pipeline ros-melodic-librviz-tutorial
+	  ros-melodic-map-msgs ros-melodic-media-export ros-melodic-message-filters
+	  ros-melodic-message-generation ros-melodic-message-runtime ros-melodic-mk ros-melodic-nav-msgs
+	  ros-melodic-nodelet ros-melodic-nodelet-core ros-melodic-nodelet-topic-tools
+	  ros-melodic-nodelet-tutorial-math ros-melodic-orocos-kdl ros-melodic-pcl-conversions
+	  ros-melodic-pcl-msgs ros-melodic-pcl-ros ros-melodic-perception ros-melodic-perception-pcl
+	  ros-melodic-pluginlib ros-melodic-pluginlib-tutorials ros-melodic-polled-camera
+	  ros-melodic-position-controllers ros-melodic-python-orocos-kdl ros-melodic-python-qt-binding
+	  ros-melodic-qt-dotgraph ros-melodic-qt-gui ros-melodic-qt-gui-cpp ros-melodic-qt-gui-py-common
+	  ros-melodic-qwt-dependency ros-melodic-realtime-tools ros-melodic-resource-retriever
+	  ros-melodic-robot ros-melodic-robot-state-publisher ros-melodic-ros ros-melodic-ros-base
+	  ros-melodic-ros-comm ros-melodic-ros-core ros-melodic-ros-environment ros-melodic-ros-tutorials
+	  ros-melodic-rosbag ros-melodic-rosbag-migration-rule ros-melodic-rosbag-storage
+	  ros-melodic-rosbash ros-melodic-rosboost-cfg ros-melodic-rosbuild ros-melodic-rosclean
+	  ros-melodic-rosconsole ros-melodic-rosconsole-bridge ros-melodic-roscpp ros-melodic-roscpp-core
+	  ros-melodic-roscpp-serialization ros-melodic-roscpp-traits ros-melodic-roscpp-tutorials
+	  ros-melodic-roscreate ros-melodic-rosgraph ros-melodic-rosgraph-msgs ros-melodic-roslang
+	  ros-melodic-roslaunch ros-melodic-roslib ros-melodic-roslint ros-melodic-roslisp
+	  ros-melodic-roslz4 ros-melodic-rosmake ros-melodic-rosmaster ros-melodic-rosmsg
+	  ros-melodic-rosnode ros-melodic-rosout ros-melodic-rospack ros-melodic-rosparam ros-melodic-rospy
+	  ros-melodic-rospy-tutorials ros-melodic-rosservice ros-melodic-rostest ros-melodic-rostime
+	  ros-melodic-rostopic ros-melodic-rosunit ros-melodic-roswtf ros-melodic-rqt-action
+	  ros-melodic-rqt-bag ros-melodic-rqt-bag-plugins ros-melodic-rqt-common-plugins
+	  ros-melodic-rqt-console ros-melodic-rqt-dep ros-melodic-rqt-graph ros-melodic-rqt-gui
+	  ros-melodic-rqt-gui-cpp ros-melodic-rqt-gui-py ros-melodic-rqt-image-view ros-melodic-rqt-launch
+	  ros-melodic-rqt-logger-level ros-melodic-rqt-moveit ros-melodic-rqt-msg ros-melodic-rqt-nav-view
+	  ros-melodic-rqt-plot ros-melodic-rqt-pose-view ros-melodic-rqt-publisher
+	  ros-melodic-rqt-py-common ros-melodic-rqt-py-console ros-melodic-rqt-reconfigure
+	  ros-melodic-rqt-robot-dashboard ros-melodic-rqt-robot-monitor ros-melodic-rqt-robot-plugins
+	  ros-melodic-rqt-robot-steering ros-melodic-rqt-runtime-monitor ros-melodic-rqt-rviz
+	  ros-melodic-rqt-service-caller ros-melodic-rqt-shell ros-melodic-rqt-srv ros-melodic-rqt-tf-tree
+	  ros-melodic-rqt-top ros-melodic-rqt-topic ros-melodic-rqt-web ros-melodic-rviz
+	  ros-melodic-rviz-plugin-tutorials ros-melodic-rviz-python-tutorial ros-melodic-self-test
+	  ros-melodic-sensor-msgs ros-melodic-shape-msgs ros-melodic-simulators ros-melodic-smach
+	  ros-melodic-smach-msgs ros-melodic-smach-ros ros-melodic-smclib ros-melodic-stage
+	  ros-melodic-stage-ros ros-melodic-std-msgs ros-melodic-std-srvs ros-melodic-stereo-image-proc
+	  ros-melodic-stereo-msgs ros-melodic-tf ros-melodic-tf-conversions ros-melodic-tf2
+	  ros-melodic-tf2-eigen ros-melodic-tf2-geometry-msgs ros-melodic-tf2-kdl ros-melodic-tf2-msgs
+	  ros-melodic-tf2-py ros-melodic-tf2-ros ros-melodic-theora-image-transport ros-melodic-topic-tools
+	  ros-melodic-trajectory-msgs ros-melodic-transmission-interface ros-melodic-turtle-actionlib
+	  ros-melodic-turtle-tf ros-melodic-turtle-tf2 ros-melodic-turtlesim ros-melodic-urdf
+	  ros-melodic-urdf-parser-plugin ros-melodic-urdf-sim-tutorial ros-melodic-urdf-tutorial
+	  ros-melodic-urdfdom-py ros-melodic-vision-opencv ros-melodic-visualization-marker-tutorials
+	  ros-melodic-visualization-msgs ros-melodic-visualization-tutorials ros-melodic-viz
+	  ros-melodic-webkit-dependency ros-melodic-xacro ros-melodic-xmlrpcpp ruby ruby-did-you-mean
+	  ruby-minitest ruby-net-telnet ruby-power-assert ruby-test-unit ruby2.5 rubygems-integration sbcl
+	  sdformat-sdf sgml-base sip-dev tango-icon-theme tk8.6-blt2.5 ttf-bitstream-vera ttf-dejavu-core
+	  xml-core
+	Suggested packages:
+	  blt-demo gazebo9-doc graphviz-doc libcurl4-doc libidn11-dev libkrb5-dev librtmp-dev libssh2-1-dev
+	  libgts-doc libjs-jquery-ui-docs liblapack-doc liblog4cxx-doc ogre-1.9-doc libogre-1.9.0v5-dbg
+	  libportaudio2 opencv-doc lksctp-tools sndiod spacenavd libtinyxml-doc libyaml-doc
+	  python-cycler-doc fonts-linuxlibertine | ttf-linux-libertine texlive-lang-french
+	  texlive-latex-base texlive-latex-recommended dvipng ffmpeg inkscape ipython python-cairocffi
+	  python-configobj python-excelerator python-gobject python-matplotlib-doc python-qt4 python-scipy
+	  python-tornado python-traits texlive-extra-utils texlive-latex-extra ttf-staypuft python-coverage
+	  python-nose-doc libgle3 python-gssapi python-pyparsing-doc python-pyqt5-dbg python-sip-doc tix
+	  python-tk-dbg wx3.0-doc ri ruby-dev bundler sbcl-doc sbcl-source slime sgml-base-doc
+	  gnome-icon-theme kdelibs-data
+	The following packages will be REMOVED:
+	  libcurl4-gnutls-dev
+	The following NEW packages will be installed:
+	  binfmt-support blt bzip2-doc docutils-common docutils-doc fltk1.3-doc fluid fonts-lato fonts-lyx
+	  gazebo9 gazebo9-common gazebo9-plugin-base google-mock googletest graphviz hddtemp libann0
+	  libapr1 libapr1-dev libaprutil1 libaprutil1-dev libassimp-dev libassimp4 libassuan-dev
+	  libavdevice-dev libavdevice57 libavfilter-dev libbullet-dev libbullet2.87 libbz2-dev libccd-dev
+	  libccd2 libcdt5 libcgraph6 libcharls1 libconsole-bridge-dev libconsole-bridge0.4
+	  libcurl4-openssl-dev libfltk-cairo1.3 libfltk-forms1.3 libfltk-gl1.3 libfltk-images1.3 libfltk1.3
+	  libfltk1.3-dev libfreeimage-dev libfreeimage3 libgazebo9 libgazebo9-dev libgdcm2-dev libgdcm2.8
+	  libgpg-error-dev libgpgme-dev libgraphviz-dev libgtest-dev libgts-0.7-5 libgts-bin libgts-dev
+	  libgvc6 libgvc6-plugins-gtk libgvpr2 libignition-cmake-dev libignition-common
+	  libignition-common-dev libignition-fuel-tools1-1 libignition-fuel-tools1-dev libignition-math4
+	  libignition-math4-dev libignition-msgs libignition-msgs-dev libignition-transport4
+	  libignition-transport4-dev libilmbase-dev libjs-jquery-ui libjxr0 liblab-gamut1 liblapack-dev
+	  libldap2-dev liblept5 liblog4cxx-dev liblog4cxx10v5 liblz4-dev libogre-1.9-dev libogre-1.9.0v5
+	  libopenal-data libopenal-dev libopenal1 libopencv-calib3d-dev libopencv-calib3d3.2
+	  libopencv-contrib-dev libopencv-contrib3.2 libopencv-core-dev libopencv-core3.2 libopencv-dev
+	  libopencv-features2d-dev libopencv-features2d3.2 libopencv-flann-dev libopencv-flann3.2
+	  libopencv-highgui-dev libopencv-highgui3.2 libopencv-imgcodecs-dev libopencv-imgcodecs3.2
+	  libopencv-imgproc-dev libopencv-imgproc3.2 libopencv-ml-dev libopencv-ml3.2
+	  libopencv-objdetect-dev libopencv-objdetect3.2 libopencv-photo-dev libopencv-photo3.2
+	  libopencv-shape-dev libopencv-shape3.2 libopencv-stitching-dev libopencv-stitching3.2
+	  libopencv-superres-dev libopencv-superres3.2 libopencv-ts-dev libopencv-video-dev
+	  libopencv-video3.2 libopencv-videoio-dev libopencv-videoio3.2 libopencv-videostab-dev
+	  libopencv-videostab3.2 libopencv-viz-dev libopencv-viz3.2 libopencv3.2-java libopencv3.2-jni
+	  libopenexr-dev libpathplan4 libpoco-dev libpococrypto50 libpocodata50 libpocodatamysql50
+	  libpocodataodbc50 libpocodatasqlite50 libpocofoundation50 libpocojson50 libpocomongodb50
+	  libpoconet50 libpoconetssl50 libpocoredis50 libpocoutil50 libpocoxml50 libpocozip50
+	  libpostproc-dev libprotoc-dev libqtpropertybrowser4 libqwt-headers libqwt-qt5-6 libqwt-qt5-dev
+	  libruby2.5 libsctp-dev libsctp1 libsdformat6 libsdformat6-dev libsdl2-2.0-0 libsimbody-dev
+	  libsimbody3.5v5 libsndio6.1 libsocket++1 libspnav0 libtar-dev libtar0 libtesseract4
+	  libtinyxml-dev libtinyxml2-6 libtinyxml2-dev liburdfdom-dev liburdfdom-headers-dev
+	  liburdfdom-model liburdfdom-model-state liburdfdom-sensor liburdfdom-world libwxbase3.0-0v5
+	  libwxgtk3.0-gtk3-0v5 libxdot4 libyaml-cpp-dev libyaml-cpp0.5v5 libyaml-dev libzip-dev libzip4
+	  libzmq3-dev libzzip-0-13 opencv-data pyqt5-dev python-backports.functools-lru-cache
+	  python-catkin-pkg python-catkin-pkg-modules python-chardet python-cycler python-dateutil
+	  python-defusedxml python-docutils python-empy python-gnupg python-matplotlib
+	  python-matplotlib-data python-netifaces python-nose python-opencv python-opengl python-paramiko
+	  python-pycryptodome python-pydot python-pygments python-pyparsing python-pyqt5
+	  python-pyqt5.qtopengl python-pyqt5.qtsvg python-pyqt5.qtwebkit python-roman python-rosdep-modules
+	  python-rosdistro python-rosdistro-modules python-rospkg python-rospkg-modules python-sip
+	  python-sip-dev python-subprocess32 python-tk python-tz python-wxgtk3.0 python-wxtools
+	  python-wxversion python-yaml rake ros-melodic-actionlib ros-melodic-actionlib-msgs
+	  ros-melodic-actionlib-tutorials ros-melodic-angles ros-melodic-bond ros-melodic-bond-core
+	  ros-melodic-bondcpp ros-melodic-bondpy ros-melodic-camera-calibration
+	  ros-melodic-camera-calibration-parsers ros-melodic-camera-info-manager ros-melodic-catkin
+	  ros-melodic-class-loader ros-melodic-cmake-modules ros-melodic-common-msgs
+	  ros-melodic-common-tutorials ros-melodic-compressed-depth-image-transport
+	  ros-melodic-compressed-image-transport ros-melodic-control-msgs ros-melodic-control-toolbox
+	  ros-melodic-controller-interface ros-melodic-controller-manager
+	  ros-melodic-controller-manager-msgs ros-melodic-cpp-common ros-melodic-cv-bridge
+	  ros-melodic-depth-image-proc ros-melodic-desktop ros-melodic-desktop-full
+	  ros-melodic-diagnostic-aggregator ros-melodic-diagnostic-analysis
+	  ros-melodic-diagnostic-common-diagnostics ros-melodic-diagnostic-msgs
+	  ros-melodic-diagnostic-updater ros-melodic-diagnostics ros-melodic-diff-drive-controller
+	  ros-melodic-dynamic-reconfigure ros-melodic-eigen-conversions ros-melodic-executive-smach
+	  ros-melodic-filters ros-melodic-forward-command-controller ros-melodic-gazebo-dev
+	  ros-melodic-gazebo-msgs ros-melodic-gazebo-plugins ros-melodic-gazebo-ros
+	  ros-melodic-gazebo-ros-control ros-melodic-gazebo-ros-pkgs ros-melodic-gencpp ros-melodic-geneus
+	  ros-melodic-genlisp ros-melodic-genmsg ros-melodic-gennodejs ros-melodic-genpy
+	  ros-melodic-geometry ros-melodic-geometry-msgs ros-melodic-geometry-tutorials
+	  ros-melodic-gl-dependency ros-melodic-hardware-interface ros-melodic-image-common
+	  ros-melodic-image-geometry ros-melodic-image-pipeline ros-melodic-image-proc
+	  ros-melodic-image-publisher ros-melodic-image-rotate ros-melodic-image-transport
+	  ros-melodic-image-transport-plugins ros-melodic-image-view
+	  ros-melodic-interactive-marker-tutorials ros-melodic-interactive-markers
+	  ros-melodic-joint-limits-interface ros-melodic-joint-state-controller
+	  ros-melodic-joint-state-publisher ros-melodic-kdl-conversions ros-melodic-kdl-parser
+	  ros-melodic-kdl-parser-py ros-melodic-laser-assembler ros-melodic-laser-filters
+	  ros-melodic-laser-geometry ros-melodic-laser-pipeline ros-melodic-librviz-tutorial
+	  ros-melodic-map-msgs ros-melodic-media-export ros-melodic-message-filters
+	  ros-melodic-message-generation ros-melodic-message-runtime ros-melodic-mk ros-melodic-nav-msgs
+	  ros-melodic-nodelet ros-melodic-nodelet-core ros-melodic-nodelet-topic-tools
+	  ros-melodic-nodelet-tutorial-math ros-melodic-orocos-kdl ros-melodic-pcl-conversions
+	  ros-melodic-pcl-msgs ros-melodic-pcl-ros ros-melodic-perception ros-melodic-perception-pcl
+	  ros-melodic-pluginlib ros-melodic-pluginlib-tutorials ros-melodic-polled-camera
+	  ros-melodic-position-controllers ros-melodic-python-orocos-kdl ros-melodic-python-qt-binding
+	  ros-melodic-qt-dotgraph ros-melodic-qt-gui ros-melodic-qt-gui-cpp ros-melodic-qt-gui-py-common
+	  ros-melodic-qwt-dependency ros-melodic-realtime-tools ros-melodic-resource-retriever
+	  ros-melodic-robot ros-melodic-robot-state-publisher ros-melodic-ros ros-melodic-ros-base
+	  ros-melodic-ros-comm ros-melodic-ros-core ros-melodic-ros-environment ros-melodic-ros-tutorials
+	  ros-melodic-rosbag ros-melodic-rosbag-migration-rule ros-melodic-rosbag-storage
+	  ros-melodic-rosbash ros-melodic-rosboost-cfg ros-melodic-rosbuild ros-melodic-rosclean
+	  ros-melodic-rosconsole ros-melodic-rosconsole-bridge ros-melodic-roscpp ros-melodic-roscpp-core
+	  ros-melodic-roscpp-serialization ros-melodic-roscpp-traits ros-melodic-roscpp-tutorials
+	  ros-melodic-roscreate ros-melodic-rosgraph ros-melodic-rosgraph-msgs ros-melodic-roslang
+	  ros-melodic-roslaunch ros-melodic-roslib ros-melodic-roslint ros-melodic-roslisp
+	  ros-melodic-roslz4 ros-melodic-rosmake ros-melodic-rosmaster ros-melodic-rosmsg
+	  ros-melodic-rosnode ros-melodic-rosout ros-melodic-rospack ros-melodic-rosparam ros-melodic-rospy
+	  ros-melodic-rospy-tutorials ros-melodic-rosservice ros-melodic-rostest ros-melodic-rostime
+	  ros-melodic-rostopic ros-melodic-rosunit ros-melodic-roswtf ros-melodic-rqt-action
+	  ros-melodic-rqt-bag ros-melodic-rqt-bag-plugins ros-melodic-rqt-common-plugins
+	  ros-melodic-rqt-console ros-melodic-rqt-dep ros-melodic-rqt-graph ros-melodic-rqt-gui
+	  ros-melodic-rqt-gui-cpp ros-melodic-rqt-gui-py ros-melodic-rqt-image-view ros-melodic-rqt-launch
+	  ros-melodic-rqt-logger-level ros-melodic-rqt-moveit ros-melodic-rqt-msg ros-melodic-rqt-nav-view
+	  ros-melodic-rqt-plot ros-melodic-rqt-pose-view ros-melodic-rqt-publisher
+	  ros-melodic-rqt-py-common ros-melodic-rqt-py-console ros-melodic-rqt-reconfigure
+	  ros-melodic-rqt-robot-dashboard ros-melodic-rqt-robot-monitor ros-melodic-rqt-robot-plugins
+	  ros-melodic-rqt-robot-steering ros-melodic-rqt-runtime-monitor ros-melodic-rqt-rviz
+	  ros-melodic-rqt-service-caller ros-melodic-rqt-shell ros-melodic-rqt-srv ros-melodic-rqt-tf-tree
+	  ros-melodic-rqt-top ros-melodic-rqt-topic ros-melodic-rqt-web ros-melodic-rviz
+	  ros-melodic-rviz-plugin-tutorials ros-melodic-rviz-python-tutorial ros-melodic-self-test
+	  ros-melodic-sensor-msgs ros-melodic-shape-msgs ros-melodic-simulators ros-melodic-smach
+	  ros-melodic-smach-msgs ros-melodic-smach-ros ros-melodic-smclib ros-melodic-stage
+	  ros-melodic-stage-ros ros-melodic-std-msgs ros-melodic-std-srvs ros-melodic-stereo-image-proc
+	  ros-melodic-stereo-msgs ros-melodic-tf ros-melodic-tf-conversions ros-melodic-tf2
+	  ros-melodic-tf2-eigen ros-melodic-tf2-geometry-msgs ros-melodic-tf2-kdl ros-melodic-tf2-msgs
+	  ros-melodic-tf2-py ros-melodic-tf2-ros ros-melodic-theora-image-transport ros-melodic-topic-tools
+	  ros-melodic-trajectory-msgs ros-melodic-transmission-interface ros-melodic-turtle-actionlib
+	  ros-melodic-turtle-tf ros-melodic-turtle-tf2 ros-melodic-turtlesim ros-melodic-urdf
+	  ros-melodic-urdf-parser-plugin ros-melodic-urdf-sim-tutorial ros-melodic-urdf-tutorial
+	  ros-melodic-urdfdom-py ros-melodic-vision-opencv ros-melodic-visualization-marker-tutorials
+	  ros-melodic-visualization-msgs ros-melodic-visualization-tutorials ros-melodic-viz
+	  ros-melodic-webkit-dependency ros-melodic-xacro ros-melodic-xmlrpcpp ruby ruby-did-you-mean
+	  ruby-minitest ruby-net-telnet ruby-power-assert ruby-test-unit ruby2.5 rubygems-integration sbcl
+	  sdformat-sdf sgml-base sip-dev tango-icon-theme tk8.6-blt2.5 ttf-bitstream-vera ttf-dejavu-core
+	  xml-core
+	0 upgraded, 479 newly installed, 1 to remove and 28 not upgraded.
+	Need to get 180 MB of archives.
+	After this operation, 775 MB of additional disk space will be used.
+	Do you want to continue? [Y/n] Y
+
+  ```
+</details>
+
+- Environment setup: It's convenient if the ROS environment variables are automatically added to your bash session every time a new shell is launched:
+```
+gedit ~/.bashrc
+source /opt/ros/melodic/setup.bash
+source ~/.bashrc
+```
+- Dependencies for building packages: Up to now you have installed what you need to run the core ROS packages. To create and manage your own ROS workspaces, there are various tools and requirements that are distributed separately. For example, [rosinstall](http://wiki.ros.org/rosinstall) is a frequently used command-line tool that enables you to easily download many source trees for ROS packages with one command. To install this tool and other dependencies for building ROS packages, run:
+```
+sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+```
+- Initialize rosdep: Before you can use many ROS tools, you will need to initialize rosdep. rosdep enables you to easily install system dependencies for source you want to compile and is required to run some core components in ROS. With the following, you can initialize rosdep:
+```
+sudo rosdep init
+rosdep update
+```
+- Make the catkin workspace:
+```
+mkdir -p ~/ros/catkin_ws_rmc/src	-->  -p means: create the directory and, if required, all parent directories.
+ln -s /home/$USER/ros/catkin_ws_rmc /home/$USER/catkin_ws
+cd catkin_ws/src
+```
+- Make the catkin workspace:
+```
+mkdir -p ~/ros/catkin_ws_rmc/src	-->  -p means: create the directory and, if required, all parent directories.
+ln -s /home/$USER/ros/catkin_ws_rmc /home/$USER/catkin_ws
+cd catkin_ws/src
+```
+
+
+
+
+
+
+
+
+
+
+
+```
+# Setup your sources.list
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+sudo apt update
+sudo apt -y install ros-melodic-ros-base
+sudo apt -y install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+sudo apt -y install python-rosdep libbtf1 libcxsparse3 libgraphblas1 libklu1 libldl2 librbio2 libspqr2 libsuitesparse-dev 
+sudo pip3 install -y catkin_pkg
+sudo apt-get install -y python3-catkin-pkg-modules
+sudo apt-get install -y python3-rospkg-modules
+
+sudo rosdep init
+rosdep update
+mkdir -p ~/ros/catkin_ws_rmc/src
+ln -s /home/$USER/ros/catkin_ws_rmc /home/$USER/catkin_ws
+cd catkin_ws/src
+
+git clone https://github.com/ros-perception/vision_opencv.git
+cd vision_opencv
+git checkout melodic
+cd ../..
+
+catkin_make
+sudo apt -y install pyqt5-dev-tools
+sudo apt -y install ros-melodic-urdf ros-melodic-roslint ros-melodic-robot-pose-ekf ros-melodic-image-transport 
+sudo apt -y install ros-melodic-velodyne-pointcloud ros-melodic-costmap-2d ros-melodic-rqt-gui ros-melodic-rqt-gui-cpp 
+sudo apt -y install ros-melodic-joy ros-melodic-xacro ros-melodic-controller-manager ros-melodic-transmission-interface
+sudo apt -y install ros-melodic-joint-limits-interface ros-melodic-global-planner ros-melodic-gmapping 
+sudo apt -y install ros-melodic-robot-state-publisher ros-melodic-kobuki-driver
+sudo apt -y install ros-melodic-nav-core ros-melodic-navfn ros-melodic-move-base-msgs ros-melodic-tf-conversions
+sudo apt -y install ros-melodic-eigen-conversions ros-melodic-tf2-geometry-msgs ros-melodic-base-local-planner 
+sudo apt -y install ros-melodic-interactive-markers ros-melodic-rqt-robot-dashboard ros-melodic-gazebo-dev 
+sudo apt -y install ros-melodic-ecl-exceptions ros-melodic-ecl-threads ros-melodic-kobuki-msgs ros-melodic-yocs-controllers
+sudo apt -y install ros-melodic-ecl-geometry ros-melodic-kobuki-dock-drive ros-melodic-polled-camera 
+sudo apt -y install ros-melodic-camera-info-manager ros-melodic-control-toolbox ros-melodic-move-base
+sudo apt -y install ros-melodic-ecl-streams ros-melodic-rqt-plot ros-melodic-yocs-cmd-vel-mux ros-melodic-map-server
+sudo apt -y install ros-melodic-rviz ros-melodic-yocs-velocity-smoother ros-melodic-amcl ros-melodic-rosbridge-suite
+
+#install robot_pose_publisher
+roscd
+cd ../src
+git clone https://github.com/GT-RAIL/robot_pose_publisher.git
+cd ..
+catkin_make 
+roscd
+cd ../src
+git@github.com:ros-simulation/gazebo_ros_pkgs.git
+cd gazebo_ros_pkgs && git checkout melodic-devel; cd ..
+catkin_make
+
 ```
 
 
