@@ -478,7 +478,7 @@ ZED SDK installation complete !
 ```
 
 ### Install OpenCV 4.1.1
-[Installation in Linux](https://docs.opencv.org/3.4.6/d7/d9f/tutorial_linux_install.html) e.g. Ubuntu 18.04.5 LTS is as follow:
+[Installation in Linux](https://docs.opencv.org/4.1.1/d7/d9f/tutorial_linux_install.html) e.g. Ubuntu 18.04.5 LTS is as follow:
 ```
 sudo apt -y remove x264 libx264-dev
 sudo apt autoremove
@@ -1160,12 +1160,13 @@ sudo apt install ros-melodic-desktop-full 👇
 - Environment setup: It's convenient if the ROS environment variables are automatically added to your bash session every time a new shell is launched:
 ```
 gedit ~/.bashrc
-source /opt/ros/melodic/setup.bash
+ADD this --> source /opt/ros/melodic/setup.bash
 source ~/.bashrc
 ```
 - Dependencies for building packages: Up to now you have installed what you need to run the core ROS packages. To create and manage your own ROS workspaces, there are various tools and requirements that are distributed separately. For example, [rosinstall](http://wiki.ros.org/rosinstall) is a frequently used command-line tool that enables you to easily download many source trees for ROS packages with one command. To install this tool and other dependencies for building ROS packages, run:
 ```
 sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+sudo apt -y install pyqt5-dev-tools
 ```
 - Initialize rosdep: Before you can use many ROS tools, you will need to initialize rosdep. rosdep enables you to easily install system dependencies for source you want to compile and is required to run some core components in ROS. With the following, you can initialize rosdep:
 ```
@@ -1176,50 +1177,37 @@ rosdep update
 ```
 mkdir -p ~/ros/catkin_ws_rmc/src	-->  -p means: create the directory and, if required, all parent directories.
 ln -s /home/$USER/ros/catkin_ws_rmc /home/$USER/catkin_ws
+```
+
+### Install robot_pose_publisher:
+```
 cd catkin_ws/src
+git clone https://github.com/GT-RAIL/robot_pose_publisher.git
+cd ..
+catkin_make  --> NOTE: If you want to use python3 "catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3"
+
+gedit ~/.bashrc
+	ADD:
+	# set ROS Melodic
+	source /opt/ros/melodic/setup.bash  --> already added.
+	source ~/catkin_ws/devel/setup.bash
+source ~/.bashrc
 ```
-- Make the catkin workspace:
+
+### Install Logger:
+Install logger with both python2 and python3 version
 ```
-mkdir -p ~/ros/catkin_ws_rmc/src	-->  -p means: create the directory and, if required, all parent directories.
-ln -s /home/$USER/ros/catkin_ws_rmc /home/$USER/catkin_ws
-cd catkin_ws/src
-```
-
-
-
-
-
-
-
-
-
-
+cd ~/app
+git clone https://github.com/SeaosRobotics/logger.git
+	- [optional]: git config --global credential.helper 'cache --timeout=604800'      --> Git securely store your password for 604800 s (1 week)
+cd logger
+python2 setup.py bdist_egg --exclude-source-files
+python3 setup.py bdist_egg --exclude-source-files
 
 ```
-# Setup your sources.list
-sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-sudo apt update
-sudo apt -y install ros-melodic-ros-base
-sudo apt -y install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
-sudo apt -y install python-rosdep libbtf1 libcxsparse3 libgraphblas1 libklu1 libldl2 librbio2 libspqr2 libsuitesparse-dev 
-sudo pip3 install -y catkin_pkg
-sudo apt-get install -y python3-catkin-pkg-modules
-sudo apt-get install -y python3-rospkg-modules
 
-sudo rosdep init
-rosdep update
-mkdir -p ~/ros/catkin_ws_rmc/src
-ln -s /home/$USER/ros/catkin_ws_rmc /home/$USER/catkin_ws
-cd catkin_ws/src
-
-git clone https://github.com/ros-perception/vision_opencv.git
-cd vision_opencv
-git checkout melodic
-cd ../..
-
-catkin_make
-sudo apt -y install pyqt5-dev-tools
+### Install more ROS pkgs:
+```
 sudo apt -y install ros-melodic-urdf ros-melodic-roslint ros-melodic-robot-pose-ekf ros-melodic-image-transport 
 sudo apt -y install ros-melodic-velodyne-pointcloud ros-melodic-costmap-2d ros-melodic-rqt-gui ros-melodic-rqt-gui-cpp 
 sudo apt -y install ros-melodic-joy ros-melodic-xacro ros-melodic-controller-manager ros-melodic-transmission-interface
@@ -1231,22 +1219,105 @@ sudo apt -y install ros-melodic-interactive-markers ros-melodic-rqt-robot-dashbo
 sudo apt -y install ros-melodic-ecl-exceptions ros-melodic-ecl-threads ros-melodic-kobuki-msgs ros-melodic-yocs-controllers
 sudo apt -y install ros-melodic-ecl-geometry ros-melodic-kobuki-dock-drive ros-melodic-polled-camera 
 sudo apt -y install ros-melodic-camera-info-manager ros-melodic-control-toolbox ros-melodic-move-base
-sudo apt -y install ros-melodic-ecl-streams ros-melodic-rqt-plot ros-melodic-yocs-cmd-vel-mux ros-melodic-map-server
+sudo apt -y install ros-melodic-ecl-streams ros-melodic-yocs-cmd-vel-mux ros-melodic-map-server
+sudo apt -y install ros-melodic-rqt*
 sudo apt -y install ros-melodic-rviz ros-melodic-yocs-velocity-smoother ros-melodic-amcl ros-melodic-rosbridge-suite
-
-#install robot_pose_publisher
-roscd
-cd ../src
-git clone https://github.com/GT-RAIL/robot_pose_publisher.git
-cd ..
-catkin_make 
-roscd
-cd ../src
-git@github.com:ros-simulation/gazebo_ros_pkgs.git
-cd gazebo_ros_pkgs && git checkout melodic-devel; cd ..
-catkin_make
-
 ```
+
+### Set ROS alias command:
+```
+gedit ~/.bashrc
+	ADD:
+	# set ROS alias command 
+	alias cw='cd ~/catkin_ws'
+	alias cs='cd ~/catkin_ws/src'
+	alias cm='cd ~/catkin_ws && catkin_make'
+source ~/.bashrc
+```
+
+### Install [pipeline_planner](https://github.com/SeaosRobotics/pipeline_planner/tree/develop-orchestration) & [obstacle_msgs](https://github.com/SeaosRobotics/obstacle_msgs/tree/develop) & [ros_orchestration_pkg](https://github.com/SeaosRobotics/ros_orchestration_pkg/tree/develop) :
+You can use the "pkgs_config" file on our Google Drive, and the "Github repo" final update date to find the version you need to install here. However, it's better to confirm with your team about the versions. 
+```
+cd catkin_ws/src
+git clone https://github.com/SeaosRobotics/pipeline_planner.git
+git checkout develop-orchestration
+cm
+
+cs
+git clone https://github.com/SeaosRobotics/obstacle_msgs.git
+git checkout develop
+cd ..
+git clone https://github.com/SeaosRobotics/ros_orchestration_pkg.git
+git checkout develop
+cm
+```
+
+### Install [rmc-sdk](https://github.com/SeaosRobotics/rmc-sdk/wiki/Installation)
+- **BLE**: Install the development headers for the bluetooth library
+```
+sudo apt install libbluetooth-dev
+```
+- Enable compatibility mode by making sure that the service located in `/lib/systemd/system/bluetooth.service` include the following lines
+```
+ExecStart=/usr/lib/bluetooth/bluetoothd --compat
+ExecStartPost=/bin/chmod 666 /var/run/sdp
+```
+- Restart the service
+```
+sudo systemctl daemon-reload
+sudo systemctl restart bluetooth.service
+```
+- Download "rmc-sdk"
+```
+cd ~/app
+git clone https://github.com/SeaosRobotics/rmc-sdk.git
+cd rmc-sdk
+git checkout feature/rms
+```
+- Configure your PYTHONPATH
+```
+PYTHONPATH='[ROS_WS]/devel/lib/python2.7/dist-packages:/opt/ros/[DISTRO]/lib/python2.7/dist-packages'
+e.g: PYTHONPATH='/home/samani/catkin_ws/devel/lib/python2.7/dist-packages:/opt/ros/melodic/lib/python2.7/dist-packages'
+```
+- Install open-source dependencies via pip
+```
+cd ~/app/rmc-sdk/rmc-core
+python3 -m pip install -r requirements.txt
+```
+- Installation can be done either as an egg (no source code left behind) or as pip package (the source code remain on the pip folder, useful for development). I use "Pip" installation.
+```
+cd ~/app/rmc-sdk/rmc-core
+python3 -m pip install --user --retries 0 ~/app/rmc-sdk/rmc-core  --> FAILD: ModuleNotFoundError: No module named 'apriltag_ros' 👇(fix it)
+	cs
+	git clone https://github.com/SeaosRobotics/apriltag_ros.git
+	cd apriltag_ros
+	git checkout master
+	cm
+	cd ~/app/rmc-sdk/rmc-core
+	python3 -m pip install --user --retries 0 ~/app/rmc-sdk/rmc-core --> FAILD: ModuleNotFoundError: No module named 'roboline'
+	cs
+	git clone https://github.com/SeaosRobotics/roboline.git
+	cd roboline
+	git checkout develop
+	cm
+	cd ~/app/rmc-sdk/rmc-core
+	python3 -m pip install --user --retries 0 ~/app/rmc-sdk/rmc-core  👇
+```
+<details>
+  <summary>Click to expand!🔽</summary>
+  
+  ```
+		  ...
+		  Running setup.py install for psutil ... done
+		  Running setup.py install for pybluez ... done
+		  Running setup.py install for termcolor ... done
+		  Running setup.py install for grpcio ... done
+		  Running setup.py install for grpcio-tools ... done
+		  Running setup.py install for rmc-core ... done
+		Successfully installed Jinja2-3.0.1 MarkupSafe-2.0.1 Werkzeug-2.0.1 aniso8601-9.0.1 attrs-21.2.0 bidict-0.21.2 catkin-pkg-0.4.23 certifi-2021.5.30 charset-normalizer-2.0.4 click-8.0.1 dataclasses-0.8 distro-1.6.0 docutils-0.17.1 flask-2.0.1 flask-restx-0.5.0 grpcio-1.39.0 grpcio-tools-1.39.0 idna-3.2 importlib-metadata-4.6.4 itsdangerous-2.0.1 jsonschema-3.2.0 numpy-1.19.5 protobuf-3.17.3 psutil-5.8.0 pybluez-0.23 pyee-8.2.2 pyparsing-2.4.7 pyrsistent-0.18.0 pyserial-3.5 python-dateutil-2.8.2 python-engineio-4.2.1 python-socketio-5.4.0 pytz-2021.1 pyyaml-5.4.1 requests-2.26.0 rmc-core-0.1.6 rospkg-1.3.0 setuptools-57.4.0 six-1.16.0 termcolor-1.1.0 typing-extensions-3.10.0.0 urllib3-1.26.6 websockets-9.1 zipp-3.5.0
+  ```
+</details>
+
 
 
 
