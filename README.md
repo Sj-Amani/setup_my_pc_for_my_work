@@ -549,200 +549,204 @@ Things you need to checkout:
 
 - Then click "Generate" , after it finished, close cmake-gui
 
-The generated CMake Configuring file:
-```
-Detected processor: x86_64
-Looking for ccache - not found
-Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found suitable version "1.2.11", minimum required is "1.2.3") 
-Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.2.11") 
-found Intel IPP (ICV version): 2019.0.0 [2019.0.0 Gold]
-at: /home/samani/app/opencv/build/3rdparty/ippicv/ippicv_lnx/icv
-found Intel IPP Integration Wrappers sources: 2019.0.0
-at: /home/samani/app/opencv/build/3rdparty/ippicv/ippicv_lnx/iw
-Could NOT find CUDNN: Found unsuitable version "..", but required is at least "6" (found /usr/lib/x86_64-linux-gnu/libcudnn.so)
-CUDA detected: 10.2
-CUDA NVCC target flags: -gencode;arch=compute_30,code=sm_30;-gencode;arch=compute_35,code=sm_35;-gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_52,code=sm_52;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-D_FORCE_INLINES
-Could not find OpenBLAS include. Turning OpenBLAS_FOUND off
-Could not find OpenBLAS lib. Turning OpenBLAS_FOUND off
-Could NOT find Atlas (missing: Atlas_CLAPACK_INCLUDE_DIR) 
-A library with BLAS API found.
-A library with LAPACK API found.
-Could NOT find JNI (missing: JAVA_INCLUDE_PATH JAVA_INCLUDE_PATH2 JAVA_AWT_INCLUDE_PATH) 
-The imported target "vtkRenderingPythonTkWidgets" references the file
-   "/usr/lib/x86_64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
-but this file does not exist.  Possible reasons include:
-* The file was deleted, renamed, or moved to another location.
-* An install or uninstall procedure did not complete successfully.
-* The installation package was faulty and contained
-   "/usr/lib/cmake/vtk-6.3/VTKTargets.cmake"
-but not all the files it references.
+The generated CMake Configuring file:  👇
+<details>
+  <summary>Click to expand!🔽</summary>
+  
+  ```
+	Detected processor: x86_64
+	Looking for ccache - not found
+	Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found suitable version "1.2.11", minimum required is "1.2.3") 
+	Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.2.11") 
+	found Intel IPP (ICV version): 2019.0.0 [2019.0.0 Gold]
+	at: /home/samani/app/opencv/build/3rdparty/ippicv/ippicv_lnx/icv
+	found Intel IPP Integration Wrappers sources: 2019.0.0
+	at: /home/samani/app/opencv/build/3rdparty/ippicv/ippicv_lnx/iw
+	Could NOT find CUDNN: Found unsuitable version "..", but required is at least "6" (found /usr/lib/x86_64-linux-gnu/libcudnn.so)
+	CUDA detected: 10.2
+	CUDA NVCC target flags: -gencode;arch=compute_30,code=sm_30;-gencode;arch=compute_35,code=sm_35;-gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_52,code=sm_52;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-D_FORCE_INLINES
+	Could not find OpenBLAS include. Turning OpenBLAS_FOUND off
+	Could not find OpenBLAS lib. Turning OpenBLAS_FOUND off
+	Could NOT find Atlas (missing: Atlas_CLAPACK_INCLUDE_DIR) 
+	A library with BLAS API found.
+	A library with LAPACK API found.
+	Could NOT find JNI (missing: JAVA_INCLUDE_PATH JAVA_INCLUDE_PATH2 JAVA_AWT_INCLUDE_PATH) 
+	The imported target "vtkRenderingPythonTkWidgets" references the file
+	   "/usr/lib/x86_64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
+	but this file does not exist.  Possible reasons include:
+	* The file was deleted, renamed, or moved to another location.
+	* An install or uninstall procedure did not complete successfully.
+	* The installation package was faulty and contained
+	   "/usr/lib/cmake/vtk-6.3/VTKTargets.cmake"
+	but not all the files it references.
 
-The imported target "vtk" references the file
-   "/usr/bin/vtk"
-but this file does not exist.  Possible reasons include:
-* The file was deleted, renamed, or moved to another location.
-* An install or uninstall procedure did not complete successfully.
-* The installation package was faulty and contained
-   "/usr/lib/cmake/vtk-6.3/VTKTargets.cmake"
-but not all the files it references.
+	The imported target "vtk" references the file
+	   "/usr/bin/vtk"
+	but this file does not exist.  Possible reasons include:
+	* The file was deleted, renamed, or moved to another location.
+	* An install or uninstall procedure did not complete successfully.
+	* The installation package was faulty and contained
+	   "/usr/lib/cmake/vtk-6.3/VTKTargets.cmake"
+	but not all the files it references.
 
-Found VTK 6.3.0 (/usr/lib/cmake/vtk-6.3/UseVTK.cmake)
-OpenCV Python: during development append to PYTHONPATH: /home/samani/app/opencv/build/python_loader
-Caffe:   NO
-Protobuf:   NO
-Glog:   YES
-freetype2:   YES (ver 21.0.15)
-harfbuzz:    YES (ver 1.7.2)
-HDF5: Using hdf5 compiler wrapper to determine C configuration
-Module opencv_ovis disabled because OGRE3D was not found
-No preference for use of exported gflags CMake configuration set, and no hints for include/library directories provided. Defaulting to preferring an installed/exported gflags CMake configuration if available.
-Found installed version of gflags: /usr/lib/x86_64-linux-gnu/cmake/gflags
-Detected gflags version: 2.2.1
-Checking SFM deps... TRUE
-CERES support is disabled. Ceres Solver for reconstruction API is required.
-HDF5: Using hdf5 compiler wrapper to determine C configuration
-Registering hook 'INIT_MODULE_SOURCES_opencv_dnn': /home/samani/app/opencv/modules/dnn/cmake/hooks/INIT_MODULE_SOURCES_opencv_dnn.cmake
-opencv_dnn: filter out cuda4dnn source code
-Checking for module 'tesseract'
-  No package 'tesseract' found
-Tesseract:   NO
-No preference for use of exported gflags CMake configuration set, and no hints for include/library directories provided. Defaulting to preferring an installed/exported gflags CMake configuration if available.
-Found installed version of gflags: /usr/lib/x86_64-linux-gnu/cmake/gflags
-Detected gflags version: 2.2.1
-Checking SFM deps... TRUE
-CERES support is disabled. Ceres Solver for reconstruction API is required.
+	Found VTK 6.3.0 (/usr/lib/cmake/vtk-6.3/UseVTK.cmake)
+	OpenCV Python: during development append to PYTHONPATH: /home/samani/app/opencv/build/python_loader
+	Caffe:   NO
+	Protobuf:   NO
+	Glog:   YES
+	freetype2:   YES (ver 21.0.15)
+	harfbuzz:    YES (ver 1.7.2)
+	HDF5: Using hdf5 compiler wrapper to determine C configuration
+	Module opencv_ovis disabled because OGRE3D was not found
+	No preference for use of exported gflags CMake configuration set, and no hints for include/library directories provided. Defaulting to preferring an installed/exported gflags CMake configuration if available.
+	Found installed version of gflags: /usr/lib/x86_64-linux-gnu/cmake/gflags
+	Detected gflags version: 2.2.1
+	Checking SFM deps... TRUE
+	CERES support is disabled. Ceres Solver for reconstruction API is required.
+	HDF5: Using hdf5 compiler wrapper to determine C configuration
+	Registering hook 'INIT_MODULE_SOURCES_opencv_dnn': /home/samani/app/opencv/modules/dnn/cmake/hooks/INIT_MODULE_SOURCES_opencv_dnn.cmake
+	opencv_dnn: filter out cuda4dnn source code
+	Checking for module 'tesseract'
+	  No package 'tesseract' found
+	Tesseract:   NO
+	No preference for use of exported gflags CMake configuration set, and no hints for include/library directories provided. Defaulting to preferring an installed/exported gflags CMake configuration if available.
+	Found installed version of gflags: /usr/lib/x86_64-linux-gnu/cmake/gflags
+	Detected gflags version: 2.2.1
+	Checking SFM deps... TRUE
+	CERES support is disabled. Ceres Solver for reconstruction API is required.
 
-General configuration for OpenCV 4.1.1 =====================================
-  Version control:               4.1.1
+	General configuration for OpenCV 4.1.1 =====================================
+	  Version control:               4.1.1
 
-  Extra modules:
-    Location (extra):            /home/samani/app/opencv_contrib/modules
-    Version control (extra):     4.1.1
+	  Extra modules:
+	    Location (extra):            /home/samani/app/opencv_contrib/modules
+	    Version control (extra):     4.1.1
 
-  Platform:
-    Timestamp:                   2021-08-24T02:23:15Z
-    Host:                        Linux 5.4.0-81-generic x86_64
-    CMake:                       3.10.2
-    CMake generator:             Unix Makefiles
-    CMake build tool:            /usr/bin/make
-    Configuration:               Release
+	  Platform:
+	    Timestamp:                   2021-08-24T02:23:15Z
+	    Host:                        Linux 5.4.0-81-generic x86_64
+	    CMake:                       3.10.2
+	    CMake generator:             Unix Makefiles
+	    CMake build tool:            /usr/bin/make
+	    Configuration:               Release
 
-  CPU/HW features:
-    Baseline:                    SSE SSE2 SSE3
-      requested:                 SSE3
-    Dispatched code generation:  SSE4_1 SSE4_2 FP16 AVX AVX2 AVX512_SKX
-      requested:                 SSE4_1 SSE4_2 AVX FP16 AVX2 AVX512_SKX
-      SSE4_1 (15 files):         + SSSE3 SSE4_1
-      SSE4_2 (2 files):          + SSSE3 SSE4_1 POPCNT SSE4_2
-      FP16 (1 files):            + SSSE3 SSE4_1 POPCNT SSE4_2 FP16 AVX
-      AVX (5 files):             + SSSE3 SSE4_1 POPCNT SSE4_2 AVX
-      AVX2 (29 files):           + SSSE3 SSE4_1 POPCNT SSE4_2 FP16 FMA3 AVX AVX2
-      AVX512_SKX (5 files):      + SSSE3 SSE4_1 POPCNT SSE4_2 FP16 FMA3 AVX AVX2 AVX_512F AVX512_COMMON AVX512_SKX
+	  CPU/HW features:
+	    Baseline:                    SSE SSE2 SSE3
+	      requested:                 SSE3
+	    Dispatched code generation:  SSE4_1 SSE4_2 FP16 AVX AVX2 AVX512_SKX
+	      requested:                 SSE4_1 SSE4_2 AVX FP16 AVX2 AVX512_SKX
+	      SSE4_1 (15 files):         + SSSE3 SSE4_1
+	      SSE4_2 (2 files):          + SSSE3 SSE4_1 POPCNT SSE4_2
+	      FP16 (1 files):            + SSSE3 SSE4_1 POPCNT SSE4_2 FP16 AVX
+	      AVX (5 files):             + SSSE3 SSE4_1 POPCNT SSE4_2 AVX
+	      AVX2 (29 files):           + SSSE3 SSE4_1 POPCNT SSE4_2 FP16 FMA3 AVX AVX2
+	      AVX512_SKX (5 files):      + SSSE3 SSE4_1 POPCNT SSE4_2 FP16 FMA3 AVX AVX2 AVX_512F AVX512_COMMON AVX512_SKX
 
-  C/C++:
-    Built as dynamic libs?:      YES
-    C++ Compiler:                /usr/bin/c++  (ver 7.5.0)
-    C++ flags (Release):         -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Winit-self -Wno-delete-non-virtual-dtor -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -fvisibility-inlines-hidden -O3 -DNDEBUG  -DNDEBUG
-    C++ flags (Debug):           -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Winit-self -Wno-delete-non-virtual-dtor -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -fvisibility-inlines-hidden -g  -O0 -DDEBUG -D_DEBUG
-    C Compiler:                  /usr/bin/cc
-    C flags (Release):           -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wuninitialized -Winit-self -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -O3 -DNDEBUG  -DNDEBUG
-    C flags (Debug):             -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wuninitialized -Winit-self -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -g  -O0 -DDEBUG -D_DEBUG
-    Linker flags (Release):      -Wl,--gc-sections  
-    Linker flags (Debug):        -Wl,--gc-sections  
-    ccache:                      NO
-    Precompiled headers:         YES
-    Extra dependencies:          m pthread cudart_static dl rt /usr/lib/x86_64-linux-gnu/libcuda.so nppc nppial nppicc nppicom nppidei nppif nppig nppim nppist nppisu nppitc npps cublas cufft -L/usr/local/cuda-10.2/lib64 -L/usr/lib/x86_64-linux-gnu
-    3rdparty dependencies:
+	  C/C++:
+	    Built as dynamic libs?:      YES
+	    C++ Compiler:                /usr/bin/c++  (ver 7.5.0)
+	    C++ flags (Release):         -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Winit-self -Wno-delete-non-virtual-dtor -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -fvisibility-inlines-hidden -O3 -DNDEBUG  -DNDEBUG
+	    C++ flags (Debug):           -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Winit-self -Wno-delete-non-virtual-dtor -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -fvisibility-inlines-hidden -g  -O0 -DDEBUG -D_DEBUG
+	    C Compiler:                  /usr/bin/cc
+	    C flags (Release):           -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wuninitialized -Winit-self -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -O3 -DNDEBUG  -DNDEBUG
+	    C flags (Debug):             -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wuninitialized -Winit-self -Wno-comment -Wimplicit-fallthrough=3 -Wno-strict-overflow -fdiagnostics-show-option -Wno-long-long -pthread -fomit-frame-pointer -ffunction-sections -fdata-sections  -msse -msse2 -msse3 -fvisibility=hidden -g  -O0 -DDEBUG -D_DEBUG
+	    Linker flags (Release):      -Wl,--gc-sections  
+	    Linker flags (Debug):        -Wl,--gc-sections  
+	    ccache:                      NO
+	    Precompiled headers:         YES
+	    Extra dependencies:          m pthread cudart_static dl rt /usr/lib/x86_64-linux-gnu/libcuda.so nppc nppial nppicc nppicom nppidei nppif nppig nppim nppist nppisu nppitc npps cublas cufft -L/usr/local/cuda-10.2/lib64 -L/usr/lib/x86_64-linux-gnu
+	    3rdparty dependencies:
 
-  OpenCV modules:
-    To be built:                 aruco bgsegm bioinspired calib3d ccalib core cudaarithm cudabgsegm cudafeatures2d cudafilters cudaimgproc cudalegacy cudaobjdetect cudaoptflow cudastereo cudawarping cudev cvv datasets dnn dnn_objdetect dpm face features2d flann freetype fuzzy gapi hdf hfs highgui img_hash imgcodecs imgproc line_descriptor ml objdetect optflow phase_unwrapping photo plot python2 python3 quality reg rgbd saliency sfm shape stereo stitching structured_light superres surface_matching text tracking ts video videoio videostab viz xfeatures2d ximgproc xobjdetect xphoto
-    Disabled:                    cudacodec world
-    Disabled by dependency:      -
-    Unavailable:                 cnn_3dobj java js matlab ovis
-    Applications:                tests perf_tests apps
-    Documentation:               NO
-    Non-free algorithms:         NO
+	  OpenCV modules:
+	    To be built:                 aruco bgsegm bioinspired calib3d ccalib core cudaarithm cudabgsegm cudafeatures2d cudafilters cudaimgproc cudalegacy cudaobjdetect cudaoptflow cudastereo cudawarping cudev cvv datasets dnn dnn_objdetect dpm face features2d flann freetype fuzzy gapi hdf hfs highgui img_hash imgcodecs imgproc line_descriptor ml objdetect optflow phase_unwrapping photo plot python2 python3 quality reg rgbd saliency sfm shape stereo stitching structured_light superres surface_matching text tracking ts video videoio videostab viz xfeatures2d ximgproc xobjdetect xphoto
+	    Disabled:                    cudacodec world
+	    Disabled by dependency:      -
+	    Unavailable:                 cnn_3dobj java js matlab ovis
+	    Applications:                tests perf_tests apps
+	    Documentation:               NO
+	    Non-free algorithms:         NO
 
-  GUI: 
-    QT:                          YES (ver 5.9.5)
-      QT OpenGL support:         NO
-    GTK+:                        NO
-    VTK support:                 YES (ver 6.3.0)
+	  GUI: 
+	    QT:                          YES (ver 5.9.5)
+	      QT OpenGL support:         NO
+	    GTK+:                        NO
+	    VTK support:                 YES (ver 6.3.0)
 
-  Media I/O: 
-    ZLib:                        /usr/lib/x86_64-linux-gnu/libz.so (ver 1.2.11)
-    JPEG:                        /usr/lib/x86_64-linux-gnu/libjpeg.so (ver 80)
-    WEBP:                        /usr/lib/x86_64-linux-gnu/libwebp.so (ver encoder: 0x020e)
-    PNG:                         /usr/lib/x86_64-linux-gnu/libpng.so (ver 1.6.34)
-    TIFF:                        /usr/lib/x86_64-linux-gnu/libtiff.so (ver 42 / 4.0.9)
-    JPEG 2000:                   /usr/lib/x86_64-linux-gnu/libjasper.so (ver 1.900.1)
-    OpenEXR:                     build (ver 2.3.0)
-    HDR:                         YES
-    SUNRASTER:                   YES
-    PXM:                         YES
-    PFM:                         YES
+	  Media I/O: 
+	    ZLib:                        /usr/lib/x86_64-linux-gnu/libz.so (ver 1.2.11)
+	    JPEG:                        /usr/lib/x86_64-linux-gnu/libjpeg.so (ver 80)
+	    WEBP:                        /usr/lib/x86_64-linux-gnu/libwebp.so (ver encoder: 0x020e)
+	    PNG:                         /usr/lib/x86_64-linux-gnu/libpng.so (ver 1.6.34)
+	    TIFF:                        /usr/lib/x86_64-linux-gnu/libtiff.so (ver 42 / 4.0.9)
+	    JPEG 2000:                   /usr/lib/x86_64-linux-gnu/libjasper.so (ver 1.900.1)
+	    OpenEXR:                     build (ver 2.3.0)
+	    HDR:                         YES
+	    SUNRASTER:                   YES
+	    PXM:                         YES
+	    PFM:                         YES
 
-  Video I/O:
-    DC1394:                      YES (2.2.5)
-    FFMPEG:                      YES
-      avcodec:                   YES (57.107.100)
-      avformat:                  YES (57.83.100)
-      avutil:                    YES (55.78.100)
-      swscale:                   YES (4.8.100)
-      avresample:                YES (3.7.0)
-    GStreamer:                   YES (1.14.5)
-    v4l/v4l2:                    YES (linux/videodev2.h)
+	  Video I/O:
+	    DC1394:                      YES (2.2.5)
+	    FFMPEG:                      YES
+	      avcodec:                   YES (57.107.100)
+	      avformat:                  YES (57.83.100)
+	      avutil:                    YES (55.78.100)
+	      swscale:                   YES (4.8.100)
+	      avresample:                YES (3.7.0)
+	    GStreamer:                   YES (1.14.5)
+	    v4l/v4l2:                    YES (linux/videodev2.h)
 
-  Parallel framework:            pthreads
+	  Parallel framework:            pthreads
 
-  Trace:                         YES (with Intel ITT)
+	  Trace:                         YES (with Intel ITT)
 
-  Other third-party libraries:
-    Intel IPP:                   2019.0.0 Gold [2019.0.0]
-           at:                   /home/samani/app/opencv/build/3rdparty/ippicv/ippicv_lnx/icv
-    Intel IPP IW:                sources (2019.0.0)
-              at:                /home/samani/app/opencv/build/3rdparty/ippicv/ippicv_lnx/iw
-    Lapack:                      NO
-    Eigen:                       YES (ver 3.3.4)
-    Custom HAL:                  NO
-    Protobuf:                    build (3.5.1)
+	  Other third-party libraries:
+	    Intel IPP:                   2019.0.0 Gold [2019.0.0]
+		   at:                   /home/samani/app/opencv/build/3rdparty/ippicv/ippicv_lnx/icv
+	    Intel IPP IW:                sources (2019.0.0)
+		      at:                /home/samani/app/opencv/build/3rdparty/ippicv/ippicv_lnx/iw
+	    Lapack:                      NO
+	    Eigen:                       YES (ver 3.3.4)
+	    Custom HAL:                  NO
+	    Protobuf:                    build (3.5.1)
 
-  NVIDIA CUDA:                   YES (ver 10.2, CUFFT CUBLAS)
-    NVIDIA GPU arch:             30 35 37 50 52 60 61 70 75
-    NVIDIA PTX archs:
+	  NVIDIA CUDA:                   YES (ver 10.2, CUFFT CUBLAS)
+	    NVIDIA GPU arch:             30 35 37 50 52 60 61 70 75
+	    NVIDIA PTX archs:
 
-  cuDNN:                         NO
+	  cuDNN:                         NO
 
-  OpenCL:                        YES (no extra features)
-    Include path:                /home/samani/app/opencv/3rdparty/include/opencl/1.2
-    Link libraries:              Dynamic load
+	  OpenCL:                        YES (no extra features)
+	    Include path:                /home/samani/app/opencv/3rdparty/include/opencl/1.2
+	    Link libraries:              Dynamic load
 
-  Python 2:
-    Interpreter:                 /usr/bin/python2.7 (ver 2.7.17)
-    Libraries:                   /usr/lib/x86_64-linux-gnu/libpython2.7.so (ver 2.7.17)
-    numpy:                       /usr/lib/python2.7/dist-packages/numpy/core/include (ver 1.13.3)
-    install path:                lib/python2.7/dist-packages/cv2/python-2.7
+	  Python 2:
+	    Interpreter:                 /usr/bin/python2.7 (ver 2.7.17)
+	    Libraries:                   /usr/lib/x86_64-linux-gnu/libpython2.7.so (ver 2.7.17)
+	    numpy:                       /usr/lib/python2.7/dist-packages/numpy/core/include (ver 1.13.3)
+	    install path:                lib/python2.7/dist-packages/cv2/python-2.7
 
-  Python 3:
-    Interpreter:                 /usr/bin/python3 (ver 3.6.9)
-    Libraries:                   /usr/lib/x86_64-linux-gnu/libpython3.6m.so (ver 3.6.9)
-    numpy:                       /home/samani/.local/lib/python3.6/site-packages/numpy/core/include (ver 1.19.5)
-    install path:                lib/python3.6/dist-packages/cv2/python-3.6
+	  Python 3:
+	    Interpreter:                 /usr/bin/python3 (ver 3.6.9)
+	    Libraries:                   /usr/lib/x86_64-linux-gnu/libpython3.6m.so (ver 3.6.9)
+	    numpy:                       /home/samani/.local/lib/python3.6/site-packages/numpy/core/include (ver 1.19.5)
+	    install path:                lib/python3.6/dist-packages/cv2/python-3.6
 
-  Python (for build):            /usr/bin/python2.7
+	  Python (for build):            /usr/bin/python2.7
 
-  Java:                          
-    ant:                         NO
-    JNI:                         NO
-    Java wrappers:               NO
-    Java tests:                  NO
+	  Java:                          
+	    ant:                         NO
+	    JNI:                         NO
+	    Java wrappers:               NO
+	    Java tests:                  NO
 
-  Install to:                    /usr/local
------------------------------------------------------------------
+	  Install to:                    /usr/local
+	-----------------------------------------------------------------
 
-Configuring done
-Generating done
-```
+	Configuring done
+	Generating done
+  ```
+</details>
 
 - Then, run:
 ```
