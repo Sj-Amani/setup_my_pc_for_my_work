@@ -462,7 +462,8 @@ The ZED Python API was installed for 'python3', when using conda environement or
 
 ZED SDK installation complete !
 ```
-### Install OpenCV 3.4.6
+
+### Install OpenCV 4.1.1
 [Installation in Linux](https://docs.opencv.org/3.4.6/d7/d9f/tutorial_linux_install.html) e.g. Ubuntu 18.04.5 LTS is as follow:
 ```
 sudo apt -y remove x264 libx264-dev
@@ -752,5 +753,79 @@ The generated CMake Configuring file:  👇
 ```
 make -j6
 sudo make install
+```
+- The installaion verification and the version of the OpenCV 4.1.1 can be checked by running:
+```
+cd ~/app
+git clone https://github.com/opencv/opencv_extra.git   --> Get the required test data for checking
+cd opencv_extra/testdata/
+pwd
+OPENCV_TEST_DATA_PATH="/home/samani/app/opencv_extra/testdata"
+cd ../../opencv/build/bin/
+./opencv_test_core    👇
+
+	CTEST_FULL_OUTPUT
+	OpenCV version: 4.1.1
+	OpenCV VCS version: 4.1.1
+	Build type: Release
+	Compiler: /usr/bin/c++  (ver 7.5.0)
+	Parallel framework: pthreads
+	CPU features: SSE SSE2 SSE3 *SSE4.1 *SSE4.2 *FP16 *AVX *AVX2 *AVX512-SKX?
+	Intel(R) IPP version: ippIP AVX2 (l9) 2019.0.0 Gold (-) Jul 24 2018
+	OpenCL Platforms: 
+	    NVIDIA CUDA
+		dGPU: NVIDIA GeForce RTX 2070 with Max-Q Design (OpenCL 3.0 CUDA)
+	Current OpenCL device: 
+	    Type = dGPU
+	    Name = NVIDIA GeForce RTX 2070 with Max-Q Design
+	    Version = OpenCL 3.0 CUDA
+	    Driver version = 470.57.02
+	    ...
+	    TEST: Skip tests with tags: 'mem_6gb', 'verylong'
+		[==========] Running 11437 tests from 238 test cases.
+		[----------] Global test environment set-up.
+		[----------] 1 test from OCL_MeanStdDev_
+		[ RUN      ] OCL_MeanStdDev_.ZeroMask
+		[       OK ] OCL_MeanStdDev_.ZeroMask (371 ms)
+		[----------] 1 test from OCL_MeanStdDev_ (371 ms total)
 
 ```
+
+
+
+### Install GTSAM [SKIPPED]
+Because this is used for "RTAB-Map" and it is not going to be used, I do NOT install it.
+However, this is how to install it if one day I want it:
+```
+cd ~/app
+git clone --branch 4.0.0-alpha2 https://github.com/borglab/gtsam.git gtsam-4.0.0-alpha2
+cd gtsam-4.0.0-alpha2
+mkdir build
+cd build
+cmake -DGTSAM_USE_SYSTEM_EIGEN=ON -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_UNSTABLE=OFF ..
+make -j4
+sudo make install
+```
+
+### Install cvsba [SKIPPED]
+Because this is used for "RTAB-Map" and it is not going to be used, I do NOT install it.
+However, this is how to install it if one day I want it:
+- Follow installation instructions from [here](http://www.uco.es/investiga/grupos/ava/node/39). Their installation is not standard CMake, you need these extra steps so "RTAB-Map" can find it:
+```
+sudo mkdir /usr/local/lib/cmake/cvsba 
+sudo mv /usr/local/lib/cmake/Findcvsba.cmake /usr/local/lib/cmake/cvsba/cvsbaConfig.cmake
+```
+
+### Install apriltags
+```
+cd ~/app
+git clone https://github.com/SeaosRobotics/apriltag.git
+cd apriltag
+cmake .
+make
+sudo make install
+```
+
+
+
+
