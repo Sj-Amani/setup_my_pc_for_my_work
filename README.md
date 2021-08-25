@@ -1440,8 +1440,39 @@ sudo apt install ros-melodic-rtabmap-ros
 - See [Tutorials](https://github.com/introlab/rtabmap/wiki/Tutorials) for a simple example of usage.
 
 
+### Install other ros packages that I need:
+RTAB-MAP 
+```
+# costmap_converter
+cs
+git clone https://github.com/rst-tu-dortmund/costmap_converter.git 
+cd costmap_converter
+git checkout master  --> [e8c1d2c]
+cm
+
+# depthimage_to_laserscan
+cs
+git clone https://github.com/ros-perception/depthimage_to_laserscan.git
+cd depthimage_to_laserscan
+git checkout melodic-devel  --> [b0e48bf]
+cm
+
+# kobuki & kobuki_desktop
+cs
+git clone https://github.com/yujinrobot/kobuki.git
+cd kobuki
+git checkout melodic  --> [23748ed3]
+cs
+git clone https://github.com/yujinrobot/kobuki_desktop.git
+git checkout melodic  --> [ea5b728]
+cm
+
+# casep
+
+# logiler_description
 
 
 
+```
 
 
