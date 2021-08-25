@@ -1325,7 +1325,7 @@ python3 -m pip install --user --retries 0 ~/app/rmc-sdk/rmc-core  --> FAILD: Mod
 - The service is handled by the specific robot's driver (currently the [rmc-keycart](https://github.com/SeaosRobotics/rmc-keycart/wiki/Installation), and the [rmc-tugbot](https://github.com/SeaosRobotics/rmc-tugbot)).
 - When the "rmc-sdk" core source is updated, the service should be restarted in order to reflect the latest changes.
 
-- Install ROS packages: [key_cart](https://github.com/SeaosRobotics/key_cart)
+- Install ROS packages for "rmc-keycart": [key_cart](https://github.com/SeaosRobotics/key_cart)
 ```
 sudo apt install libftdi-dev
 
@@ -1375,4 +1375,13 @@ sudo journalctl -u rmc_keycart.service -f --all| ccze -A
 ```
 # journal for rmc-keycart
 alias rmc-journal='sudo journalctl -u rmc_keycart.service -f --all | ccze -A'
+```
+
+- Install ROS packages for "rmc-tugbot": [tb_factory](https://github.com/SeaosRobotics/tb_factory)
+```
+cs
+git clone https://github.com/SeaosRobotics/tb_factory.git
+cd tb_factory
+git checkout develop  --> [31e9e4b] 
+cm
 ```
