@@ -1367,14 +1367,14 @@ python3 -m pip install --user --retries 0 ~/app/rmc-keycart  👇
 ```
 sudo systemctl restart rmc_keycart.service
 ```
-- **Monitoring:** The standard installation of the rmc-keycart uses a standard systemctl installation and as such uses the standard journalctl log.
+- **Monitoring:** The standard installation of the rmc-keycart uses a standard `systemctl` installation and as such uses the standard `journalctl` log.
 ```
 sudo journalctl -u rmc_keycart.service -f --all| ccze -A
 ```
 - For convenience an alias can be made on the `~/.bash_aliases` file with the following line in order to call the journal easier.
 ```
 # journal for rmc-keycart
-alias rmc-journal='sudo journalctl -u rmc_keycart.service -f --all | ccze -A'
+alias rmc-journal-keycart='sudo journalctl -u rmc_keycart.service -f --all | ccze -A'
 ```
 
 - Install ROS packages for "rmc-tugbot": [tb_factory](https://github.com/SeaosRobotics/tb_factory)
@@ -1385,3 +1385,49 @@ cd tb_factory
 git checkout develop  --> [31e9e4b] 
 cm
 ```
+- Download "rmc-tugbot" and install its open-source dependencies via pip
+```
+cd ~/app
+git clone https://github.com/SeaosRobotics/rmc-tugbot.git
+cd rmc-tugbot
+git checkout feature/rms  --> [2e33ade]
+python3 -m pip install -r requirements.txt
+```
+- **"rmc-tugbot"** installation can be done either as an egg (no source code left behind) or as pip package (the source code remain on the pip folder, useful for development). I use "Pip" installation.
+```
+cd ~/app/rmc-tugbot
+python3 -m pip install --user --retries 0 ~/app/rmc-tugbot  👇
+```
+<details>
+  <summary>Click to expand!🔽</summary>
+  
+  ```
+		  ...
+		  Running setup.py install for psutil ... done
+		  Running setup.py install for termcolor ... done
+		  Running setup.py install for rmc-tb ... done
+		Successfully installed Jinja2-3.0.1 MarkupSafe-2.0.1 Werkzeug-2.0.1 aniso8601-9.0.1 attrs-21.2.0 bidict-0.21.2 catkin-pkg-0.4.23 certifi-2021.5.30 charset-normalizer-2.0.4 click-8.0.1 dataclasses-0.8 distro-1.6.0 docutils-0.17.1 flask-2.0.1 flask-restx-0.5.0 idna-3.2 importlib-metadata-4.6.4 itsdangerous-2.0.1 jsonschema-3.2.0 numpy-1.19.5 psutil-5.8.0 pyee-8.2.2 pyparsing-2.4.7 pyrsistent-0.18.0 pyserial-3.5 python-dateutil-2.8.2 python-engineio-4.2.1 python-socketio-5.4.0 pytz-2021.1 pyyaml-5.4.1 requests-2.26.0 rmc-tb-0.0.2 rospkg-1.3.0 setuptools-57.4.0 six-1.16.0 termcolor-1.1.0 typing-extensions-3.10.0.0 urllib3-1.26.6 websockets-9.1 zipp-3.5.0
+  ```
+</details>
+
+- **Service:** When the rmc-tugbot is updated the `systemctl` service should be restarted in order to reflect the latest changes.
+```
+sudo systemctl restart rmc_tugbot.service
+```
+- **Monitoring:** The standard installation of the rmc-tugbot uses a standard `systemctl` installation and as such uses the standard `journalctl` log.
+```
+sudo journalctl -u rmc_tugbot.service -f --all| ccze -A
+```
+- For convenience an alias can be made on the `~/.bash_aliases` file with the following line in order to call the journal easier.
+```
+# journal for rmc-tugbot
+alias rmc-journal-tugbot='sudo journalctl -u rmc_tugbot.service -f --all | ccze -A'
+```
+
+
+
+
+
+
+
+
