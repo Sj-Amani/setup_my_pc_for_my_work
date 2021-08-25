@@ -1410,11 +1410,11 @@ python3 -m pip install --user --retries 0 ~/app/rmc-tugbot  👇
   ```
 </details>
 
-- **Service:** When the rmc-tugbot is updated the `systemctl` service should be restarted in order to reflect the latest changes.
+- **[NOT ready yet] Service:** When the rmc-tugbot is updated the `systemctl` service should be restarted in order to reflect the latest changes.
 ```
 sudo systemctl restart rmc_tugbot.service
 ```
-- **Monitoring:** The standard installation of the rmc-tugbot uses a standard `systemctl` installation and as such uses the standard `journalctl` log.
+- **[NOT ready yet] Monitoring:** The standard installation of the rmc-tugbot uses a standard `systemctl` installation and as such uses the standard `journalctl` log.
 ```
 sudo journalctl -u rmc_tugbot.service -f --all| ccze -A
 ```
@@ -1424,6 +1424,20 @@ sudo journalctl -u rmc_tugbot.service -f --all| ccze -A
 alias rmc-journal-tugbot='sudo journalctl -u rmc_tugbot.service -f --all | ccze -A'
 ```
 
+### Install [RTAB-Map's ROS](http://wiki.ros.org/rtabmap_ros) package.
+RTAB-MAP can be installed on different systems ([ref](https://github.com/introlab/rtabmap/wiki/Installation)).
+
+- If `ROS` is already installed ([ref](https://github.com/introlab/rtabmap/wiki/Installation#if-ros-is-already-installed)), dependencies should already be satisfied.
+- Base on the [rtabmap_ros](https://github.com/introlab/rtabmap_ros#installation):  
+```  
+sudo apt install ros-melodic-rtabmap-ros
+```  
+- NOTE:	When launching `rtabmap_ros`'s nodes, if you have the error `error while loading shared libraries...`, try `ldconfig` or add the next line at the end of your `~/.bashrc` to fix it:  
+	```
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/ros/noetic/lib/x86_64-linux-gnu
+	```  
+- For the standalone, execute the application (`rtabmap`) in a terminal.
+- See [Tutorials](https://github.com/introlab/rtabmap/wiki/Tutorials) for a simple example of usage.
 
 
 
