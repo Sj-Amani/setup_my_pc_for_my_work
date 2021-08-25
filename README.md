@@ -1467,12 +1467,61 @@ git clone https://github.com/yujinrobot/kobuki_desktop.git
 git checkout melodic  --> [ea5b728]
 cm
 
-# casep
+# casep (I need to push my local repo to remote->casep->amani branch)
+cs
+git clone https://github.com/SeaosRobotics/casep.git
+cd casep
+git checkout amani  --> [the latest]
+cm
+
+# Turtlebot3 & turtlebot3_autorace & turtlebot3_msgs & turtlebot_simulator
+cs
+git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
+cd turtlebot3
+git checkout master  --> [c89e366]
+cd turtlebot3_teleop
+	# NOTE: Copy my changes to here "node", and "launch files"
+cs
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_autorace.git
+cd turtlebot3_autorace
+git checkout master  --> [391144a]
+cs
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+cd turtlebot3_msgs
+git checkout master  --> [c39bfe6]
+cs
+git clone https://github.com/turtlebot/turtlebot_simulator.git
+cd turtlebot_simulator
+git checkout melodic  --> [beae4b3]
+cm
 
 # logiler_description
+cs
+git clone https://github.com/SeaosRobotics/logiler_description.git
+cd logiler_description
+git checkout master  --> [9fadc12]
+cm
 
+# USB Video Camera
+cs
+git clone https://github.com/ros-drivers/camera_umd.git
+cd camera_umd
+git checkout master  --> [d88418b]
+cm
 
+# logiler_sim
 
+# robot_setup_tf
+
+# zed-ros-wrapper
+
+# TimSim
+
+# ~/app
+gazebo_apriltag
+usbWifi
+ROSIntegration
+ROSIntegrationVision
 ```
 
 
