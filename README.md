@@ -1325,6 +1325,16 @@ python3 -m pip install --user --retries 0 ~/app/rmc-sdk/rmc-core  --> FAILD: Mod
 - The service is handled by the specific robot's driver (currently the [rmc-keycart](https://github.com/SeaosRobotics/rmc-keycart/wiki/Installation), and the [rmc-tugbot](https://github.com/SeaosRobotics/rmc-tugbot)).
 - When the "rmc-sdk" core source is updated, the service should be restarted in order to reflect the latest changes.
 
+- Install ROS packages: [key_cart](https://github.com/SeaosRobotics/key_cart)
+```
+sudo apt install libftdi-dev
+
+cs
+git clone https://github.com/SeaosRobotics/key_cart.git
+cd key_cart
+git checkout develop  --> [ee4101f] 
+cm
+```
 - Download "rmc-keycart" and install its open-source dependencies via pip
 ```
 cd ~/app
@@ -1350,7 +1360,6 @@ python3 -m pip install --user --retries 0 ~/app/rmc-keycart  👇
 		  Running setup.py install for termcolor ... done
 		  Running setup.py install for rmc-keycart ... done
 		Successfully installed Jinja2-3.0.1 MarkupSafe-2.0.1 Werkzeug-2.0.1 aniso8601-9.0.1 appdirs-1.4.4 attrs-21.2.0 bidict-0.21.2 catkin-pkg-0.4.23 certifi-2021.5.30 charset-normalizer-2.0.4 click-8.0.1 dataclasses-0.8 distro-1.6.0 docutils-0.17.1 flask-2.0.1 flask-restplus-0.13.0 idna-3.2 importlib-metadata-4.6.4 itsdangerous-2.0.1 jsonschema-3.2.0 mako-1.1.5 numpy-1.19.5 psutil-5.8.0 pybluez-0.23 pycuda-2021.1 pyee-8.2.2 pyparsing-2.4.7 pyrsistent-0.18.0 pyserial-3.5 python-dateutil-2.8.2 python-engineio-4.2.1 python-socketio-5.4.0 pytools-2021.2.8 pytz-2021.1 pyyaml-5.4.1 requests-2.26.0 rmc-keycart-0.1.2 rospkg-1.3.0 setuptools-57.4.0 six-1.16.0 termcolor-1.1.0 typing-extensions-3.10.0.0 urllib3-1.26.6 websockets-9.1 zipp-3.5.0
-
   ```
 </details>
 
