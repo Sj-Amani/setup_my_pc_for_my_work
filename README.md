@@ -838,8 +838,9 @@ sudo mv /usr/local/lib/cmake/Findcvsba.cmake /usr/local/lib/cmake/cvsba/cvsbaCon
 ### Install apriltags
 ```
 cd ~/app
-git clone https://github.com/SeaosRobotics/apriltag.git
+git clone https://github.com/SeaosRobotics/apriltag.git 
 cd apriltag
+git checkout master  --> [7564236]
 cmake .
 make
 sudo make install
@@ -1183,7 +1184,9 @@ ln -s /home/$USER/ros/catkin_ws_rmc /home/$USER/catkin_ws
 ```
 cd catkin_ws/src
 git clone https://github.com/GT-RAIL/robot_pose_publisher.git
-cd ..
+cd robot_pose_publisher
+git checkout develop  --> [b51d2d0] 
+cd ../..
 catkin_make  --> NOTE: If you want to use python3 "catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3"
 
 gedit ~/.bashrc
@@ -1201,6 +1204,7 @@ cd ~/app
 git clone https://github.com/SeaosRobotics/logger.git
 	- [optional]: git config --global credential.helper 'cache --timeout=604800'      --> Git securely store your password for 604800 s (1 week)
 cd logger
+git checkout master  --> [5667596] 
 python2 setup.py bdist_egg --exclude-source-files
 python3 setup.py bdist_egg --exclude-source-files
 
@@ -1252,7 +1256,7 @@ git checkout develop
 cm
 ```
 
-### Install [rmc-sdk](https://github.com/SeaosRobotics/rmc-sdk/wiki/Installation)
+### Install [rmc-sdk](https://github.com/SeaosRobotics/rmc-sdk/wiki/Installation) and Install [rmc-keycart](https://github.com/SeaosRobotics/rmc-keycart/wiki/Installation)
 - **BLE**: Install the development headers for the bluetooth library
 ```
 sudo apt install libbluetooth-dev
@@ -1272,7 +1276,7 @@ sudo systemctl restart bluetooth.service
 cd ~/app
 git clone https://github.com/SeaosRobotics/rmc-sdk.git
 cd rmc-sdk
-git checkout feature/rms
+git checkout feature/rms  --> [5b8f0ae]
 ```
 - Configure your PYTHONPATH
 ```
@@ -1284,21 +1288,21 @@ e.g: PYTHONPATH='/home/samani/catkin_ws/devel/lib/python2.7/dist-packages:/opt/r
 cd ~/app/rmc-sdk/rmc-core
 python3 -m pip install -r requirements.txt
 ```
-- Installation can be done either as an egg (no source code left behind) or as pip package (the source code remain on the pip folder, useful for development). I use "Pip" installation.
+- **"rmc-sdk"** installation can be done either as an egg (no source code left behind) or as pip package (the source code remain on the pip folder, useful for development). I use "Pip" installation.
 ```
 cd ~/app/rmc-sdk/rmc-core
 python3 -m pip install --user --retries 0 ~/app/rmc-sdk/rmc-core  --> FAILD: ModuleNotFoundError: No module named 'apriltag_ros' 👇(fix it)
 	cs
 	git clone https://github.com/SeaosRobotics/apriltag_ros.git
 	cd apriltag_ros
-	git checkout master
+	git checkout master  --> [21f27ce]
 	cm
 	cd ~/app/rmc-sdk/rmc-core
 	python3 -m pip install --user --retries 0 ~/app/rmc-sdk/rmc-core --> FAILD: ModuleNotFoundError: No module named 'roboline'
 	cs
 	git clone https://github.com/SeaosRobotics/roboline.git
 	cd roboline
-	git checkout develop
+	git checkout develop  --> [909f314]
 	cm
 	cd ~/app/rmc-sdk/rmc-core
 	python3 -m pip install --user --retries 0 ~/app/rmc-sdk/rmc-core  👇
@@ -1318,7 +1322,48 @@ python3 -m pip install --user --retries 0 ~/app/rmc-sdk/rmc-core  --> FAILD: Mod
   ```
 </details>
 
+- The service is handled by the specific robot's driver (currently the [rmc-keycart](https://github.com/SeaosRobotics/rmc-keycart/wiki/Installation), and the [rmc-tugbot](https://github.com/SeaosRobotics/rmc-tugbot)).
+- When the "rmc-sdk" core source is updated, the service should be restarted in order to reflect the latest changes.
 
+- Download "rmc-keycart" and install its open-source dependencies via pip
+```
+cd ~/app
+git clone https://github.com/SeaosRobotics/rmc-keycart.git
+cd rmc-keycart
+git checkout develop  --> [1f310b6]
+python3 -m pip install -r requirements.txt
+```
+- **"rmc-keycart"** installation can be done either as an egg (no source code left behind) or as pip package (the source code remain on the pip folder, useful for development). I use "Pip" installation.
+```
+cd ~/app/rmc-keycart
+python3 -m pip install --user --retries 0 ~/app/rmc-keycart  👇
+```
+<details>
+  <summary>Click to expand!🔽</summary>
+  
+  ```
+		  ...
+		  Running setup.py install for psutil ... done
+		  Running setup.py install for pybluez ... done
+		  Running setup.py install for pytools ... done
+		  Running setup.py install for pycuda ... done
+		  Running setup.py install for termcolor ... done
+		  Running setup.py install for rmc-keycart ... done
+		Successfully installed Jinja2-3.0.1 MarkupSafe-2.0.1 Werkzeug-2.0.1 aniso8601-9.0.1 appdirs-1.4.4 attrs-21.2.0 bidict-0.21.2 catkin-pkg-0.4.23 certifi-2021.5.30 charset-normalizer-2.0.4 click-8.0.1 dataclasses-0.8 distro-1.6.0 docutils-0.17.1 flask-2.0.1 flask-restplus-0.13.0 idna-3.2 importlib-metadata-4.6.4 itsdangerous-2.0.1 jsonschema-3.2.0 mako-1.1.5 numpy-1.19.5 psutil-5.8.0 pybluez-0.23 pycuda-2021.1 pyee-8.2.2 pyparsing-2.4.7 pyrsistent-0.18.0 pyserial-3.5 python-dateutil-2.8.2 python-engineio-4.2.1 python-socketio-5.4.0 pytools-2021.2.8 pytz-2021.1 pyyaml-5.4.1 requests-2.26.0 rmc-keycart-0.1.2 rospkg-1.3.0 setuptools-57.4.0 six-1.16.0 termcolor-1.1.0 typing-extensions-3.10.0.0 urllib3-1.26.6 websockets-9.1 zipp-3.5.0
 
+  ```
+</details>
 
-
+- **Service:** When the rmc-keycart is updated the `systemctl` service should be restarted in order to reflect the latest changes.
+```
+sudo systemctl restart rmc_keycart.service
+```
+- **Monitoring:** The standard installation of the rmc-keycart uses a standard systemctl installation and as such uses the standard journalctl log.
+```
+sudo journalctl -u rmc_keycart.service -f --all| ccze -A
+```
+- For convenience an alias can be made on the `~/.bash_aliases` file with the following line in order to call the journal easier.
+```
+# journal for rmc-keycart
+alias rmc-journal='sudo journalctl -u rmc_keycart.service -f --all | ccze -A'
+```
