@@ -1620,5 +1620,26 @@ NOTE: To test what a key is, run cat and then press the key:
 	^[[5~  --> PageUp
 	^[[6~  --> PageDown	
 
+# ShellTile: A tiling window extension for GNOME Shell.
+Not installed now. Later, I may install it: https://extensions.gnome.org/extension/657/shelltile/
 
+# Install tree
+sudo apt install tree
+
+# Install fonts:
+sudo apt update && sudo apt -y install font-manager
+	# Open the font manager and from it select the font file using the + bottom to be installed.
+	# The font format is in ttf.
+
+# Install nvm
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+nvm install node  --> run this in a new terminal
+	# should download and install the latest version of node.
+	# To update node later on just do
+	nvm install node
+	nvm alias default node
 ```
+
+
+
+**END!**
