@@ -52,6 +52,7 @@ sudo snap install chromium
 sudo snap install code --classic
 sudo snap install slack --classic
 sudo snap install skype
+sudo snap install brave
 sudo apt autoremove
 ```
 ### Add the languages you want
@@ -1561,4 +1562,63 @@ sudo reboot    --> if you did NOT reboot in the previous step.
 # ROSIntegrationVision  --> not now, it's for TimSim
 ```
 
+### [Optional] Install/Add other things
+```
+# for intalling ifconfig
+sudo apt install net-tools
 
+# Add ROS Network
+gedit ~/.bashrc
+ADD:
+	# set ROS Network in ~/.bashrc
+	export ROS_HOSTNAME=X.Y.Z.W    --> get it using "ifconfig" command. e.g. X.Y.Z.W = 192.168.1.10
+	export ROS_MASTER_URI=http://A.B.C.D:11311  --> it can be different. e.g. A.B.C.D = ${ROS_HOSTNAME}
+
+# test that your gazebo is connected to your ros (http://gazebosim.org/tutorials?tut=ros_installing&cat=connect_ros)
+roscore
+rosrun gazebo_ros gazebo
+	# You should see within the lists topics such as:
+	/gazebo/link_states
+	/gazebo/model_states
+	/gazebo/parameter_descriptions
+	/gazebo/parameter_updates
+	/gazebo/set_link_state
+	/gazebo/set_model_state
+
+# install Teb-local-planner
+sudo apt install ros-melodic-teb-local-planner
+	...
+	The following NEW packages will be installed:
+	  ros-melodic-costmap-converter ros-melodic-mbf-abstract-core
+	  ros-melodic-mbf-costmap-core ros-melodic-mbf-msgs ros-melodic-mbf-utility
+	  ros-melodic-teb-local-planner
+	0 upgraded, 6 newly installed, 0 to remove and 28 not upgraded.
+
+# Add Simulation Environment params
+gedit ~/.bashrc
+ADD:
+	# set environment variable 'LOGILER_BASE'
+	export LOGILER_STACKS=carry
+	export LOGILER_OBSERVATION_SOURCES=2d_bump
+	export LOGILER_3D_SENSOR=r200
+	export LOGILER_2D_SENSOR=sick
+	export LOGILER_BASE=keycart
+
+	# for logiler sim tugbot
+	#export LOGILER_BASE=tugbot # tugbot keycart
+	#export LOGILER_STACKS=default
+	#export LOGILER_3D_SENSOR=zed
+	#export LOGILER_2D_SENSOR=velodyne
+	
+# Searching previous command history with PageUp/Down:
+gedit ~/.inputrc
+ADD:
+	"\e[5~":history-search-backward   
+	"\e[6~":history-search-forward 
+
+NOTE: To test what a key is, run cat and then press the key:
+	^[[5~  --> PageUp
+	^[[6~  --> PageDown	
+
+
+```
