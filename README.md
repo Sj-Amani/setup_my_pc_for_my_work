@@ -1295,7 +1295,7 @@ python3 -m pip install --user --retries 0 ~/app/rmc-sdk/rmc-core  --> FAILD: Mod
 	cs
 	git clone https://github.com/SeaosRobotics/apriltag_ros.git
 	cd apriltag_ros
-	git checkout master  --> [21f27ce]
+	git checkout master  --> [21f27ce] --> also for size of tags, open config --> tags.yaml --> standalone_tags --> e.g. {id: 1,  size: 0.168}
 	cm
 	cd ~/app/rmc-sdk/rmc-core
 	python3 -m pip install --user --retries 0 ~/app/rmc-sdk/rmc-core --> FAILD: ModuleNotFoundError: No module named 'roboline'
@@ -1382,7 +1382,7 @@ alias rmc-journal-keycart='sudo journalctl -u rmc_keycart.service -f --all | ccz
 cs
 git clone https://github.com/SeaosRobotics/tb_factory.git
 cd tb_factory
-git checkout develop  --> [31e9e4b] 
+git checkout develop  --> [31e9e4b]  --> later I will push my changes to a branch named "amani"
 cm
 ```
 - Download "rmc-tugbot" and install its open-source dependencies via pip
@@ -1441,7 +1441,6 @@ sudo apt install ros-melodic-rtabmap-ros
 
 
 ### Install other ros packages that I need:
-RTAB-MAP 
 ```
 # costmap_converter
 cs
@@ -1510,18 +1509,43 @@ git checkout master  --> [d88418b]
 cm
 
 # logiler_sim
+cs
+git clone https://github.com/SeaosRobotics/logiler_sim.git
+cd logiler_sim
+git checkout feature/gazebo  --> [6125365] --> I will push my changes later.
+cm
 
-# robot_setup_tf
+# zed-ros-wrapper for zed skd 3.4.2
+cs
+git clone https://github.com/stereolabs/zed-ros-wrapper.git
+cd zed-ros-wrapper
+git pull --recurse-submodules
+git checkout v3.4.x  --> [55df6d0]  --> check the compatible version with your "zed skd" version from here "https://github.com/stereolabs/zed-ros-wrapper/tags" 
+cw
+rosdep install --from-paths src --ignore-src -r -y
+rm -rf devel/ build/
+catkin_make -DCMAKE_BUILD_TYPE=Release
 
-# zed-ros-wrapper
+# TimSim  --> not now
+```
 
-# TimSim
+### Install other packages that I need in "~/app":
+```
+#gazebo_apriltag
+gazebo --> open gazebo, then close it.
+cd ~/app
+git clone https://github.com/koide3/gazebo_apriltag.git
+cd gazebo_apriltag
+git checkout master  --> [872685a] 
+cp -R ./models/* ~/.gazebo/models/   --> create it if it's not there
 
-# ~/app
-gazebo_apriltag
-usbWifi
-ROSIntegration
-ROSIntegrationVision
+
+# usbWifi
+
+
+# ROSIntegration  --> not now, it's for TimSim
+
+# ROSIntegrationVision  --> not now, it's for TimSim
 ```
 
 
