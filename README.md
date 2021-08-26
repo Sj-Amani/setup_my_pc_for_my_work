@@ -1541,7 +1541,20 @@ cp -R ./models/* ~/.gazebo/models/   --> create it if it's not there
 
 
 # usbWifi
-
+cd ~/app
+sudo apt update
+sudo apt install -y dkms
+mkdir usbWifi
+cd usbWifi
+git clone https://github.com/morrownr/8821au.git
+cd 8821au
+git checkout main  --> [077612c]
+sudo ./install-driver.sh    --> A file called "8821au.conf" will be created at "/etc/modprobe.d/8821au.conf".
+	Do you want to edit the driver options file now? [y/n] y  --> I did NOT change it. I just wanted to see it.
+	Do you want to reboot now? [y/n] y
+sudo reboot    --> if you did NOT reboot in the previous step.
+	# NOTE: For more info about the "Driver Options" & "Removal of the Driver", check the git repo.
+	# NOTE: Avoid USB 3.1 Gen 2 ports if possible as almost all currently available adapters have been tested with USB 3.1 Gen 1 (aka USB 3) and not with USB 3.1 Gen 2.
 
 # ROSIntegration  --> not now, it's for TimSim
 
