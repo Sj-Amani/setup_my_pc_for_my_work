@@ -440,7 +440,7 @@ chmod +x ZED_SDK_Ubuntu18_cuda10.2_v3.4.2.run
 ```
 - At the beginning of the installation, the Software License will be displayed, hit `q` after reading it.
 - During the installation, you might have to answer some questions on dependencies, tools and samples installation. Type `y` for yes and `n` for no and hit `Enter`. Hit `Enter` to pick the default option.
-- Important question that I answered:
+- The important questions that I answered:
 ```
 Do you want to install the Object Detection module (recommended), cuDNN 8.0 and TensorRT 7.1 will be installed [Y/n] ?n  ➡️ because I did not want to install cuDNN 8.0 and TensorRT 7.1! 
 Install samples (recommended) [Y/n] ?n
