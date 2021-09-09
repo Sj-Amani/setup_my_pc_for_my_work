@@ -40,6 +40,9 @@ After
 ```
 sudo add-apt-repository ppa:git-core/ppa
 sudo apt install git git-lfs
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+git config --global credential.helper 'cache --timeout=604800' # for one week: 604800 seconds
 ```
 
 ### Install useful things
