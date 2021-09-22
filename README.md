@@ -1645,6 +1645,10 @@ nvm install node  --> run this in a new terminal
 # Install "User-Agent Switcher for Chrome" extension
 With this extension, you can quickly and easily switch between user-agent strings. 
 Install from here: https://chrome.google.com/webstore/detail/user-agent-switcher-for-c/djflhoibgkdhkhhcedjiklpkjnoahfmg
+
+# Install Kazam for capturing screencasts and screenshots
+sudo apt update
+sudo apt install kazam
 ```
 
 ### Linking ROS workspace to use the opencv 4.1.1:
