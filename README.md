@@ -1649,6 +1649,9 @@ Install from here: https://chrome.google.com/webstore/detail/user-agent-switcher
 # Install Kazam for capturing screencasts and screenshots
 sudo apt update
 sudo apt install kazam
+
+# Install Pomodoro, A simple time management utility
+Activities ➡️ Ubuntu Software ➡️ Pomodoro
 ```
 
 ### Linking ROS workspace to use the opencv 4.1.1:
