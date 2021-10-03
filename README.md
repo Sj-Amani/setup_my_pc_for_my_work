@@ -56,6 +56,7 @@ sudo snap install code --classic
 sudo snap install slack --classic
 sudo snap install skype
 sudo snap install brave
+sudo snap install ffmpeg
 sudo apt autoremove
 ```
 ### Add the languages you want
