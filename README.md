@@ -1653,6 +1653,11 @@ sudo apt install kazam
 
 # Install Pomodoro, A simple time management utility
 Activities ➡️ Ubuntu Software ➡️ Pomodoro
+
+# Install SQLite and SQLite Browser for database management
+sudo apt update
+sudo apt install sqlite3
+sudo snap install sqlitebrowser
 ```
 
 ### Linking ROS workspace to use the opencv 4.1.1:
