@@ -1658,7 +1658,9 @@ Activities ➡️ Ubuntu Software ➡️ Pomodoro
 sudo apt update
 sudo apt install sqlite3
 sudo snap install sqlitebrowser
-sudo apt install libglew-dev     # For using the Object Detection API in ZED SDK
+
+# For using the Object Detection API in ZED SDK
+sudo apt install libglew-dev 
 ```
 
 ### Linking ROS workspace to use the opencv 4.1.1:
