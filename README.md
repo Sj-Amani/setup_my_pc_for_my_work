@@ -1661,6 +1661,9 @@ sudo snap install sqlitebrowser
 
 # For using the Object Detection API in ZED SDK
 sudo apt install libglew-dev 
+
+# gedit - text editting tools e.g. insert comments (#) 
+sudo apt install gedit-plugins
 ```
 
 ### Linking ROS workspace to use the opencv 4.1.1:
